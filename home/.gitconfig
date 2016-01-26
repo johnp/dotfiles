@@ -1,0 +1,21 @@
+[user]
+	name = Johannes Pfrang
+	email = johannespfrang@gmail.com
+
+[alias]
+	# shortcuts
+	l = log --pretty=oneline -n 10 --graph --abbrev-commit
+	s = status -s
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+	amend = commit --amend --reuse-message=HEAD
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+

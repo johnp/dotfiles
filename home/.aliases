@@ -1,0 +1,18 @@
+alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
+alias dnfit='sudo dnf install --enablerepo=updates-testing'
+alias dnfutd='sudo dnf upgrade --enablerepo=updates-testing --downloadonly -y'
+alias dnfdt='sudo dnf distro-sync --enablerepo=updates-testing --allowerasing'
+alias dnfdtr='sudo dnf distro-sync --enablerepo=updates-testing --refresh --allowerasing'
+alias dnfdtd='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -y --allowerasing'
+alias dnfdtdr='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -y --refresh --allowerasing'
+alias karma='fedora-easy-karma --fas-username=johnp117'
+alias karma-update='fedora-easy-karma --fas-username=johnp117 --include-commented'
+alias gpg='gpg2 --expert'
+alias repos='cd ~/Repos'
+alias work='cd ~/Work'
+alias sudo='sudo '
+
+# unset aliases that I don't like
+# these are ='sudo'
+unalias _
+unalias please

@@ -1,0 +1,2 @@
+export JSGC_DISABLE_POISONING=1
+export LESS='NiX'
