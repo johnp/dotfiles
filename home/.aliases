@@ -1,3 +1,5 @@
+
+# fedora dnf aliases
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
 alias dnfutd='sudo dnf upgrade --enablerepo=updates-testing --downloadonly -y'
@@ -7,9 +9,15 @@ alias dnfdtd='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -
 alias dnfdtdr='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -y --refresh --allowerasing'
 alias karma='fedora-easy-karma --fas-username=johnp117'
 alias karma-update='fedora-easy-karma --fas-username=johnp117 --include-commented'
+# gpg -> gpg2
 alias gpg='gpg2 --expert'
+# locally checked out repositories
 alias repos='cd ~/Repos'
-alias work='cd ~/Work'
+# aliases for syncthing folders
+alias work='cd ~/Sync/Work'
+alias projects='cd ~/Sync/Projects'
+alias uni='cd ~/Sync/Uni Bamberg'
+# sudo alias fix
 alias sudo='sudo '
 # common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
 alias rm='rm -i --one-file-system'
