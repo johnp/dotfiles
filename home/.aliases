@@ -11,6 +11,8 @@ alias gpg='gpg2 --expert'
 alias repos='cd ~/Repos'
 alias work='cd ~/Work'
 alias sudo='sudo '
+# common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
+alias rm='rm -i --one-file-system'
 
 # unset aliases that I don't like
 # these are ='sudo'
