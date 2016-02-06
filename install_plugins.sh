@@ -1,4 +1,6 @@
 #/bin/sh
+# This script clones custom themes and plugins for oh-my-zsh.
+# Therefore, oh-my-zsh has to be installed first.
 
 # custom plugins
 git submodule add --depth 1 https://github.com/djui/alias-tips.git $HOME/.oh-my-zsh/custom/plugins/alias-tips

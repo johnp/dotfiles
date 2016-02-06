@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/johnp/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 # github.com/andsens/homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
@@ -11,6 +11,7 @@ homeshick --quiet refresh 2
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powerlevel9k configuration
+# AUR: powerline-fonts-git
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
@@ -34,16 +35,17 @@ ENABLE_CORRECTION="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="dd.mm.yyyy"
+# disable the venv cd feature of the virtualenvwrapper plugin
+export DISABLE_VENV_CD=1
+
+# virualenv home
+export WORKON_HOME=~/.virtualenvs
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras colored-man-pages common-aliases history systemd fedora sudo man rsync zsh-syntax-highlighting alias-tips)
+plugins=(gitfast git-extras virtualenvwrapper colored-man-pages common-aliases history systemd archlinux fedora sudo man rsync zsh-syntax-highlighting alias-tips)
 
 # Plugin configs
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
@@ -66,9 +68,6 @@ unsetopt nomatch
 source "$HOME/.aliases"
 
 # gpg-agent
+# Note: .xinitrc contains initialization code, but is not included in dotfiles for now
 GPG_TTY=$(tty)
 export GPG_TTY
-
-# python development
-export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
