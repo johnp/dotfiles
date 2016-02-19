@@ -1,73 +1,88 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+## Dotfiles
 # github.com/andsens/homeshick
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
-# check castles every other day
-homeshick --quiet refresh 2
+if [ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
+  source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+  fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+  # check castles every other day
+  homeshick --quiet refresh 2
+fi
 
-# Set name of the theme to load.
-ZSH_THEME="powerlevel9k/powerlevel9k"
+## Theme
+if [[ "$(tty)" == "/dev/tty"* ]]; then
+  # do not theme login shell
+  ZSH_THEME=""
+else
+  # hide user@host if $DEFAULT_USER@localhost
+  DEFAULT_USER='johnp'
+  if [ -d "$ZSH/custom/themes/powerlevel9k" ]; then
+    # powerlevel9k/powerlevel9k
+    ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# Powerlevel9k configuration
-# AUR: powerline-fonts-git
-POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHOW_CHANGESET=true
-POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
+    # source custom code points
+    # todo: add to dotfiles and combine with Xdefaults font setting
+    if [ -f "$HOME/.local/p9k" ]; then
+      . "$HOME/.local/p9k"
+    fi
+
+    # Powerlevel9k configuration
+    # gabrielelana/awesome-terminal-fonts
+    # ryanoasis/nerd-fonts
+    POWERLEVEL9K_MODE='awesome-fontconfig'
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs root_indicator)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+    POWERLEVEL9K_STATUS_VERBOSE=true
+    POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+    POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+    POWERLEVEL9K_SHOW_CHANGESET=true
+    POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
+  else
+    ZSH_THEME="agnoster"
+  fi
+fi
 
 # Hyphen-insensitive completion.
 HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
-
-# Uncomment the following line to enable command auto-correction.
+# Command auto-correction.
 ENABLE_CORRECTION="true"
-
+# Update oh-my-zsh every 7 days.
+export UPDATE_ZSH_DAYS=7
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+## Plugins
+plugins=(gitfast git-extras virtualenvwrapper colored-man-pages common-aliases extract history systemd archlinux fedora sudo man rsync zsh-syntax-highlighting alias-tips)
+
+## Plugin configuration
+# suggest aliases
+export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 # disable the venv cd feature of the virtualenvwrapper plugin
 export DISABLE_VENV_CD=1
-
 # virualenv home
 export WORKON_HOME=~/.virtualenvs
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast git-extras virtualenvwrapper colored-man-pages common-aliases history systemd archlinux fedora sudo man rsync zsh-syntax-highlighting alias-tips)
-
-# Plugin configs
-export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
-
-# User configuration
-
-export PATH="/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/johnp/.local/bin:/home/johnp/bin"
+## User configuration
+export PATH="/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# source local .zshrc overrides
+if [ -f "$HOME/.local/zshrc" ]; then
+    source "$HOME/.local/zshrc"
+fi
 
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# Don't use the fancy zsh wildcards
+# disable zsh wildcards
 unsetopt nomatch
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# source custom aliases
 source "$HOME/.aliases"
 
 # gpg-agent
-# Note: .xinitrc contains initialization code, but is not included in dotfiles for now
 GPG_TTY=$(tty)
 export GPG_TTY
