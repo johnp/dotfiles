@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Firefox Nightly - Safe Mode
+GenericName=Web Browser - Safe Mode
+Comment=Browse the Web - Safe Mode
+Exec="firejail --shell=none --tracelog --env=JSGC_DISABLE_POISONING=1 --seccomp.eperm=ptrace --whitelist=/opt/nightly/ -- /opt/nightly/firefox -safe-mode %u"
+Terminal=false
+Type=Application
+Icon=firefox-nightly-icon
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
+StartupNotify=false
