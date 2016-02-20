@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=Network;WebBrowser;
+Comment=Browse the Web
+Exec=firejail --shell=none --tracelog --env=JSGC_DISABLE_POISONING=1 --seccomp.eperm=ptrace --whitelist=/opt/nightly/ --whitelist=~/.lastpass --whitelist=~/Sync -- /opt/nightly/firefox %u
+GenericName=Web Browser
+Icon=/opt/nightly/browser/icons/mozicon128.png
+Keywords=web;browser;internet;
+MimeType=text/html;application/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;
+Name=Firefox Nightly
+Path=/opt/nightly/
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-Desktop-File-Install-Version=0.22
+X-KDE-SubstituteUID=false
+X-KDE-Username=
