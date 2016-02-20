@@ -2,7 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ## Dotfiles
-# github.com/andsens/homeshick
+# andsens/homeshick
 if [ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
   fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
@@ -62,11 +62,11 @@ plugins=(gitfast git-extras virtualenvwrapper colored-man-pages common-aliases e
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 # disable the venv cd feature of the virtualenvwrapper plugin
 export DISABLE_VENV_CD=1
-# virualenv home
+# virtualenv home
 export WORKON_HOME=~/.virtualenvs
 
 ## User configuration
-export PATH="/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin"
+export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # source local .zshrc overrides
