@@ -1,0 +1,82 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    colors = true
+    interval = 5
+}
+
+order += "disk /"
+#order += "run_watch DHCP"
+order += "ethernet vpn"
+order += "wireless _first_"
+order += "ethernet enp5s0f1"
+order += "whatismyip"
+#order += "volume master"
+order += "volume_status"
+order += "battery 1"
+order += "cpu_temperature 0"
+order += "load"
+order += "tztime local"
+
+wireless _first_ {
+    format_up = "W: (%quality at %essid, %bitrate) %ip"
+    format_down = "W"
+}
+
+ethernet enp5s0f1 {
+    format_up = "E: %ip"
+    format_down = "E"
+}
+
+whatismyip {
+    url = "https://api.ipify.org"
+}
+
+#volume master {
+#    format = " %volume"
+#    format_muted = " %volume"
+#	device = "default"
+#}
+
+volume_status {
+    format = " {percentage}%"
+    format_muted = " {percentage}%"
+}
+
+battery 1 {
+    format = "%status: %percentage %remaining"
+    hide_seconds = true
+}
+
+#run_watch DHCP {
+#    pidfile = "/run/dhcpcd-*.pid"
+#}
+
+ethernet vpn {
+    format_up = "VPN: %ip"
+    format_down = "VPN"
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M:%S"
+}
+
+cpu_temperature 0 {
+    format = "CPU: %degrees°C"
+    max_threshold = 64
+#   path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input" 
+}
+
+load {
+    format = "%1min %5min"
+}
+
+disk "/" {
+    format = "%avail"
+}

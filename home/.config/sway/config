@@ -1,0 +1,303 @@
+# johnp's config for sway
+#
+# Read `man 5 sway` for a complete reference.
+
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Your preferred terminal emulator
+#set $term urxvtc
+set $term urxvt
+# Your preferred application launcher
+#set $menu dmenu_run
+set $menu j4-dmenu-desktop
+#set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
+#set $menu j4-dmenu-desktop -d 'rofi -dmenu -i -p \"run:\"'
+# Set preferred font
+#font  
+# Set screenlocker
+set $slock swaylock -c 2D2D2D80
+
+### Output configuration
+#
+# Default wallpaper - CC-BY-NC from Netzlemming http://netzlemming.deviantart.com/art/Field-of-Barley-05240017-307176737
+#output * bg /usr/share/sway/wallpaper.jpg fill
+output * bg /home/johnp/Pictures/Wallpapers/wallhaven-103929.png fill
+#
+# Example output configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+### Key bindings
+#
+# Basics:
+#
+    # start a terminal
+    bindsym $mod+Return exec $term
+
+    # kill focused window
+    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
+
+    # start your launcher
+    bindsym $mod+d exec $menu
+    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='rofi -dmenu -i -font "snap 12" -bg "#222222" -fg "#888888" -hlbg "#285577" -hlfg "#ffffff" -opacity 90 -m 0 -location 2'
+    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -dmenu -i -p '' -font 'hermit 14' -bg '#000000' -hlbg '#000000' -fg '#FFFFFF' -hlfg '#ffb964' -bc '$red' -bw 2 -opacity 70"
+    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -dmenu -i -p ''"
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+    bindsym $mod+Shift+r restart
+
+    # exit sway (logs you out of your wayland session)
+    bindsym $mod+Shift+e exit
+#
+# Moving around:
+#
+    # Move your focus around with $mod+[h|j|k|l], like vim
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
+    # ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # tab through workspaces
+    bindsym $mod+Tab workspace next
+    bindsym $mod+Shift+Tab workspace prev
+    # switch to workspace
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+h or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+#
+# Status Bar:
+#
+bar {
+         status_command py3status -c ~/.config/i3status/config
+#        position top
+#        colors {
+#            statusline #ffffff
+#            background #323232
+#            inactive_workspace #32323200 #32323200 #5c5c5c
+#        }
+}
+
+#
+# Input devices:
+#
+input 2:7:SynPS/2_Synaptics_TouchPad {
+        tap enabled
+        click_method button_areas
+        natural_scroll disabled
+        middle_emulation enabled
+        scroll_method edge
+}
+
+set $resize "resize: 'jkl,' or arrow keys"qq
+bindsym $mod+r mode $resize
+
+# resize window (you can also use the mouse for that)
+mode $resize {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym semicolon resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return  mode "default"
+    bindsym Escape  mode "default"
+    bindsym q       mode "default"
+}
+
+# Lockscreen
+bindsym $mod+o exec --no-startup-id $slock
+
+# Shutdown menu
+set $sysmenu "system:  [r]eload  l[o]ck  [l]ogout  [p]oweroff  re[b]oot"
+bindsym $mod+Pause      mode $sysmenu
+
+mode $sysmenu {
+    bindsym r         restart
+    bindsym o         exec --no-startup-id $slock, mode "default"
+    bindsym l         exit
+    bindsym p         exec systemctl poweroff
+    bindsym b         exec systemctl reboot
+
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
+    bindsym q         mode "default"
+}
+
+
+# force i3status update
+set $update killall -SIGUSR1 i3status
+set $updatepy3 killall -USR1 py3status
+
+#
+# Multimedia Keys
+# alsa
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ && $updatepy3
+bindsym XF86AudioLowerVolume exec amixer set Master 10%- && $updatepy3
+bindsym XF86AudioMute exec amixer set Master toggle && $updatpy3
+# pulseaudio
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $updatepy3
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $updatepy3
+#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $updatpy3
+# pause / play / next / previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Brightness Control
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
+
+# Sleep key
+bindsym XF86Sleep exec swaylock && systemctl suspend
+
+# Floating defaults
+#for_window [window_role="pop-up"] floating enable
+for_window [class="swaylock"] floating enable
+
+# gaps
+#new_window pixel
+#new_float pixel
+gaps edge_gaps off
+#gaps outer 10
+gaps inner 10
+
+# Dynamic Gaps configuration
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym q      mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym q      mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym q      mode "default"
+}
