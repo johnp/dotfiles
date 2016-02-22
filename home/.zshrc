@@ -46,7 +46,7 @@ fi
 # Hyphen-insensitive completion.
 HYPHEN_INSENSITIVE="true"
 # Command auto-correction.
-ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 # Update oh-my-zsh every 7 days.
 export UPDATE_ZSH_DAYS=7
 # Uncomment the following line if you want to disable marking untracked files
