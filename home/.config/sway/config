@@ -101,6 +101,8 @@ exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
+	# or jump to urgent
+    bindsym $mod+x [urgent=latest] focus
 
     # _move_ the focused window with the same, but add Shift
     bindsym $mod+Shift+h move left
@@ -111,7 +113,7 @@ exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+Shift+Right move right    
 #
 # Workspaces:
 #
