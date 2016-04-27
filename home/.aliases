@@ -16,11 +16,13 @@ alias repos='cd ~/Repos'
 # aliases for syncthing folders
 alias work='cd ~/Sync/Work'
 alias projects='cd ~/Sync/Projects'
-alias uni='cd ~/Sync/Uni Bamberg'
+alias uni='cd ~/Sync/Uni\ Bamberg'
 # sudo alias fix
 alias sudo='sudo '
 # common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
 alias rm='rm -i --one-file-system'
+# some more
+alias journal='journalctl -xeb'
 
 # unset aliases that I don't like
 # these are ='sudo'

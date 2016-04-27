@@ -18,7 +18,8 @@ set $menu j4-dmenu-desktop
 # Set preferred font
 #font  
 # Set screenlocker
-set $slock swaylock -c 2D2D2D80
+#set $slock swaylock -c 2D2D2D80
+set $slock swaylock -c FF000060
 
 ### Output configuration
 #
@@ -29,6 +30,31 @@ output * bg /home/johnp/Pictures/Wallpapers/wallhaven-103929.png fill
 # Example output configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+### Autostart
+# 
+# Primary workspace - Several terminals should be here
+assign [title="^Primary Terminal$"] 1
+exec urxvtc -title "Primary Terminal"
+#rename workspace 1 to man "1: Terminal"
+
+# TODO: 2-4 should be assigned to Firefox/Chromium/etc.
+#rename workspace 2 to "2: Firefox"
+#rename workspace 3 to "3: Chromium"
+#rename workspace 4 to "4: Misc"
+
+assign [title="^Remmina$"] 5
+# todo fullscreen split ?
+# for_window [] fullscreen on
+#rename workspace 5 to "5: RDP"
+
+# maybe move this even further back
+# IRC / Weechat / firejail / tmux / systemd-unit
+assign [title="^IRC$"] 6
+exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
+#rename workspace 6 to "6: IRC"
+
+
 
 ### Key bindings
 #
@@ -232,11 +258,11 @@ set $updatepy3 killall -USR1 py3status
 # alsa
 bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ && $updatepy3
 bindsym XF86AudioLowerVolume exec amixer set Master 10%- && $updatepy3
-bindsym XF86AudioMute exec amixer set Master toggle && $updatpy3
+bindsym XF86AudioMute exec amixer set Master toggle && $updatepy3
 # pulseaudio
 #bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $updatepy3
 #bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $updatepy3
-#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $updatpy3
+#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $updatepy3
 # pause / play / next / previous
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl pause
@@ -248,11 +274,11 @@ bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 
 # Sleep key
-bindsym XF86Sleep exec swaylock && systemctl suspend
+#bindsym XF86Sleep exec $slock && systemctl suspend
+bindsym XF86Sleep exec sway3lock -c 111111 && systemctl suspend
 
 # Floating defaults
 #for_window [window_role="pop-up"] floating enable
-for_window [class="swaylock"] floating enable
 
 # gaps
 #new_window pixel
@@ -301,3 +327,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
         bindsym q      mode "default"
 }
+
+exec gpgconf --launch gpg-agent
+
+# make sure we end up one the first workspace
+#workspace 1

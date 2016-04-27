@@ -14,6 +14,7 @@ general {
 order += "disk /"
 #order += "run_watch DHCP"
 order += "ethernet vpn"
+order += "ethernet ppp0"
 order += "wireless _first_"
 order += "ethernet enp5s0f1"
 order += "whatismyip"
@@ -61,6 +62,11 @@ battery 1 {
 ethernet vpn {
     format_up = "VPN: %ip"
     format_down = "VPN"
+}
+
+ethernet ppp0 {
+    format_up = "Uni-VPN: %ip"
+    format_down = ""
 }
 
 tztime local {
