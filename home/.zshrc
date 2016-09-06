@@ -21,10 +21,10 @@ else
     # powerlevel9k/powerlevel9k
     ZSH_THEME="powerlevel9k/powerlevel9k"
 
-    # source custom code points
+    # source device-specific code points
     # todo: add to dotfiles and combine with Xdefaults font setting
-    if [ -f "$HOME/.local/p9k" ]; then
-      . "$HOME/.local/p9k"
+    if [ -f "$HOME/.local/`hostname`/p9k" ]; then
+      . "$HOME/.local/`hostname`/p9k"
     fi
 
     # Powerlevel9k configuration
@@ -70,8 +70,8 @@ export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # source local .zshrc overrides
-if [ -f "$HOME/.local/zshrc" ]; then
-    source "$HOME/.local/zshrc"
+if [ -f "$HOME/.local/`hostname`/zshrc" ]; then
+    source "$HOME/.local/`hostname`/zshrc"
 fi
 
 # source oh-my-zsh
@@ -86,3 +86,8 @@ source "$HOME/.aliases"
 # gpg-agent
 GPG_TTY=$(tty)
 export GPG_TTY
+
+# TODO: this is probably keyboard/device-specific!
+# --> compare with .inputrc / put it someplace sane
+bindkey '^[Od' backward-word
+bindkey '^[Oc' forward-word

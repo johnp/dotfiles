@@ -1,0 +1,7 @@
+# Laptop configuration
+
+# autostart gpg-agent
+exec --no-startup-id gpgconf --launch gpg-agent
+
+# autostart dust notification daemon
+exec --no-startup-id dunst

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# A script for updating Archlinux using pacmatic and pacaur
+
+export pacman_program="pacaur --needed --devel"
+export pacdiff_program="sudo pacdiff"
+export log_file="/var/log/arch-news.log"
+
+# Update package database
+# sudo pacman -Sy
+# Check if there are any updates available (not including AUR)
+# sudo pacman -Qu
+# TODO: above not necessary if snapper deletes no-diff snaps
+#       (BACKGROUND_CHECK and move /var/log to btrfs subvolume)
+
+# Start Upgrade
+pacmatic -Syu $@
