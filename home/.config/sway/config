@@ -7,53 +7,80 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Your preferred terminal emulator
+# Terminal emulator
 #set $term urxvtc
 set $term urxvt
-# Your preferred application launcher
+# Application launcher
 #set $menu dmenu_run
 set $menu j4-dmenu-desktop
 #set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
 #set $menu j4-dmenu-desktop -d 'rofi -dmenu -i -p \"run:\"'
-# Set preferred font
+# Preferred font
 #font  
-# Set screenlocker
+# Screenlocker
+# opaque
+set $slock swaylock -c 1C1C1C
+# transparent
 #set $slock swaylock -c 2D2D2D80
-set $slock swaylock -c FF000060
+#set $slock swaylock -c FF000060
 
 ### Output configuration
 #
-# Default wallpaper - CC-BY-NC from Netzlemming http://netzlemming.deviantart.com/art/Field-of-Barley-05240017-307176737
-#output * bg /usr/share/sway/wallpaper.jpg fill
-output * bg /home/johnp/Pictures/Wallpapers/wallhaven-103929.png fill
+# Default wallpaper
+output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Previous default wallpaper - CC-BY-NC from Netzlemming http://netzlemming.deviantart.com/art/Field-of-Barley-05240017-307176737
+#output * bg /home/johnp/Pictures/Wallpapers/wallhaven-103929.png fill
 #
 # Example output configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running `swaymsg -t get_outputs`
 
-### Autostart
-# 
-# Primary workspace - Several terminals should be here
+# Global settings
+#
+# titlebar and no edge borders
+border normal 2
+hide_edge_borders both
+# multi-monitor mouse
+#seamless_mouse on
+
+# Assign applications to workspaces
+#
 assign [title="^Primary Terminal$"] 1
-exec urxvtc -title "Primary Terminal"
-#rename workspace 1 to man "1: Terminal"
-
+#assign [class="^URxvt"] 1
 # TODO: 2-4 should be assigned to Firefox/Chromium/etc.
-#rename workspace 2 to "2: Firefox"
-#rename workspace 3 to "3: Chromium"
+#assign [class="^$"] 2
+#assign [class="^$"] 3
+#assign [class="^$"] 4
+assign [class="^PyCharm"] 5
+assign [class="^PhpStorm"] 5
+assign [class="^IntelliJ"] 5
+assign [class="^JetBrains"] 5
+assign [title="^Remmina"] 6
+assign [title="^RDP"] 6
+assign [class="^Thunderbird"] 7
+#assign [class="^$"] 8
+#assign [title="^IRC$"] 9
+assign [class="^JDownloader"] 10
+
+
+### Rename workspaces
+# 
+# Primary terminal on first workspace
+exec $term -title "Primary Terminal"
+#rename workspace 1 to man "1: Terminal"
+#rename workspace 2 to "2: Browser"
+#rename workspace 3 to "3: Browser"
 #rename workspace 4 to "4: Misc"
-
-assign [title="^Remmina$"] 5
-# todo fullscreen split ?
-# for_window [] fullscreen on
-#rename workspace 5 to "5: RDP"
-
-# maybe move this even further back
+#rename workspace 5 to "5: IDE"
+# TODO: stacked Remmina/RDP
+#rename workspace 6 to "6: RDP"
+#rename workspace 7 to "7: Email"
 # IRC / Weechat / firejail / tmux / systemd-unit
-assign [title="^IRC$"] 6
-exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
-#rename workspace 6 to "6: IRC"
-
+#exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
+#rename workspace 9 to "9: IRC"
+#rename workspace 10 to "10: JD"
 
 
 ### Key bindings
@@ -146,9 +173,9 @@ exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+h or $mod+v, for horizontal and vertical splits
+    # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+h splith
+    bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
@@ -183,6 +210,7 @@ exec urxvtc -title "IRC" -e sh -c "tmux attach -t irc"
 #
 # Status Bar:
 #
+# TODO: pango!
 bar {
          status_command py3status -c ~/.config/i3status/config
 #        position top
@@ -204,13 +232,11 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
         scroll_method edge
 }
 
-set $resize "resize: 'jkl,' or arrow keys"qq
+# Resize window
+set $resize "resize: 'jkl,' or arrow keys"
 bindsym $mod+r mode $resize
 
-# resize window (you can also use the mouse for that)
 mode $resize {
-    # These bindings trigger as soon as you enter the resize mode
-
     # Pressing left will shrink the window’s width.
     # Pressing right will grow the window’s width.
     # Pressing up will shrink the window’s height.
@@ -251,7 +277,7 @@ mode $sysmenu {
 }
 
 
-# force i3status update
+# force status bar update
 set $update killall -SIGUSR1 i3status
 set $updatepy3 killall -USR1 py3status
 
@@ -276,18 +302,18 @@ bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 
 # Sleep key
-#bindsym XF86Sleep exec $slock && systemctl suspend
-bindsym XF86Sleep exec sway3lock -c 111111 && systemctl suspend
+bindsym XF86Sleep exec $slock && systemctl suspend
 
 # Floating defaults
 #for_window [window_role="pop-up"] floating enable
 
+
 # gaps
 #new_window pixel
 #new_float pixel
-gaps edge_gaps off
+#gaps edge_gaps off
 #gaps outer 10
-gaps inner 10
+#gaps inner 10
 
 # Dynamic Gaps configuration
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -330,7 +356,8 @@ mode "$mode_gaps_outer" {
         bindsym q      mode "default"
 }
 
-exec gpgconf --launch gpg-agent
+# Include device-specific configuration
+include ~/.config/sway/`hostname`/*
 
 # make sure we end up one the first workspace
 #workspace 1

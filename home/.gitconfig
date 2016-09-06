@@ -1,6 +1,7 @@
 [user]
 	name = Johannes Pfrang
 	email = johannespfrang@gmail.com
+	signingkey = 0x3E518B72D7FEB8D1
 
 [alias]
 	# shortcuts
@@ -21,3 +22,7 @@
 
 [push]
 	default = simple
+[commit]
+	gpgsign = true
+[diff]
+	compactionHeuristic = true

@@ -23,6 +23,8 @@ alias sudo='sudo '
 alias rm='rm -i --one-file-system'
 # some more
 alias journal='journalctl -xeb'
+# overwrite lt alias for reverse sorting
+alias lt='ls -ltFhr'
 
 # unset aliases that I don't like
 # these are ='sudo'

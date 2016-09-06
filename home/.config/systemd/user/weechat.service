@@ -4,7 +4,7 @@ Description=Weechat IRC Client (in tmux)
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/tmux -2 new-session -d -s irc firejail --name=tmuxirc /usr/bin/weechat
+ExecStart=/usr/bin/tmux -2 new-session -d -s irc firejail --name=tmuxirc weechat-curses
 ExecStop=/usr/bin/tmux kill-session -t irc && firejail --shutdown=tmuxirc
 
 [Install]

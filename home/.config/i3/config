@@ -141,6 +141,7 @@ assign [title="^Remmina"] $workspace6
 assign [title="^RDP"] $workspace6
 assign [class="^Thunderbird"] $workspace7
 #assign [class="^Sublime"] $workspace8
+assign [class="^JDownloader"] $workspace10
 
 #for_window [title="^RDP"] fullscreen
 

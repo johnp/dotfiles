@@ -20,8 +20,10 @@
 !!green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 
-*background: #002b36
-*foreground: #657b83
+!!*background: #002b36
+!!*foreground: #657b83
+*background: #000000
+*foreground: #FFFFFF
 *cursorColor: #93a1a1
 *pointerColorBackground: #586e75
 *pointerColorForeground: #93a1a1
