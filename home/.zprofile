@@ -12,5 +12,5 @@ export QUOTING_STYLE=literal
 
 # source machine specific profile
 if [ -f "$HOME/.local/profile" ] ; then
-    . "$HOME/.local/`hostname`/profile"
+    . "$HOME/.local/$HOST/profile"
 fi

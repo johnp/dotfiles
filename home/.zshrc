@@ -23,8 +23,8 @@ else
 
     # source device-specific code points
     # todo: add to dotfiles and combine with Xdefaults font setting
-    if [ -f "$HOME/.local/`hostname`/p9k" ]; then
-      . "$HOME/.local/`hostname`/p9k"
+    if [ -f "$HOME/.local/$HOST/p9k" ]; then
+      . "$HOME/.local/$HOST/p9k"
     fi
 
     # Powerlevel9k configuration
@@ -70,8 +70,8 @@ export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # source local .zshrc overrides
-if [ -f "$HOME/.local/`hostname`/zshrc" ]; then
-    source "$HOME/.local/`hostname`/zshrc"
+if [ -f "$HOME/.local/$HOST/zshrc" ]; then
+    source "$HOME/.local/$HOST/zshrc"
 fi
 
 # source oh-my-zsh
