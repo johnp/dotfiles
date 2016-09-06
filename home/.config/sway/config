@@ -5,31 +5,24 @@
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Logo key
 set $mod Mod4
 # Terminal emulator
 #set $term urxvtc
 set $term urxvt
 # Application launcher
-#set $menu dmenu_run
 set $menu j4-dmenu-desktop
 #set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
 #set $menu j4-dmenu-desktop -d 'rofi -dmenu -i -p \"run:\"'
 # Preferred font
 #font  
 # Screenlocker
-# opaque
 set $slock swaylock -c 1C1C1C
-# transparent
-#set $slock swaylock -c 2D2D2D80
-#set $slock swaylock -c FF000060
 
 ### Output configuration
 #
 # Default wallpaper
 output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-# Previous default wallpaper - CC-BY-NC from Netzlemming http://netzlemming.deviantart.com/art/Field-of-Barley-05240017-307176737
-#output * bg /home/johnp/Pictures/Wallpapers/wallhaven-103929.png fill
 #
 # Example output configuration:
 #
@@ -37,7 +30,7 @@ output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # You can get the names of your outputs by running `swaymsg -t get_outputs`
 
-# Global settings
+### Global settings
 #
 # titlebar and no edge borders
 border normal 2
@@ -49,7 +42,7 @@ hide_edge_borders both
 #
 assign [title="^Primary Terminal$"] 1
 #assign [class="^URxvt"] 1
-# TODO: 2-4 should be assigned to Firefox/Chromium/etc.
+# Note: 2, 3 and 4 for free use
 #assign [class="^$"] 2
 #assign [class="^$"] 3
 #assign [class="^$"] 4
@@ -59,22 +52,23 @@ assign [class="^IntelliJ"] 5
 assign [class="^JetBrains"] 5
 assign [title="^Remmina"] 6
 assign [title="^RDP"] 6
-assign [class="^Thunderbird"] 7
+assign [class="Mozilla Thunderbird$"] 7
 #assign [class="^$"] 8
 #assign [title="^IRC$"] 9
 assign [class="^JDownloader"] 10
 
 
 ### Rename workspaces
-# 
+# TODO: Get a nice font and use some nice icons
+#
 # Primary terminal on first workspace
 exec $term -title "Primary Terminal"
-#rename workspace 1 to man "1: Terminal"
+#rename workspace 1 to "1: Terminal"
 #rename workspace 2 to "2: Browser"
 #rename workspace 3 to "3: Browser"
 #rename workspace 4 to "4: Misc"
 #rename workspace 5 to "5: IDE"
-# TODO: stacked Remmina/RDP
+# TODO: workspace 6 should be stacked by default
 #rename workspace 6 to "6: RDP"
 #rename workspace 7 to "7: Email"
 # IRC / Weechat / firejail / tmux / systemd-unit
@@ -96,21 +90,16 @@ exec $term -title "Primary Terminal"
 
     # start your launcher
     bindsym $mod+d exec $menu
-    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='rofi -dmenu -i -font "snap 12" -bg "#222222" -fg "#888888" -hlbg "#285577" -hlfg "#ffffff" -opacity 90 -m 0 -location 2'
-    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -dmenu -i -p '' -font 'hermit 14' -bg '#000000' -hlbg '#000000' -fg '#FFFFFF' -hlfg '#ffb964' -bc '$red' -bw 2 -opacity 70"
-    #bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -dmenu -i -p ''"
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+    # restart sway in-place (preserves your layout/session, can be used to upgrade sway)
     bindsym $mod+Shift+r restart
 
     # exit sway (logs you out of your wayland session)
@@ -123,23 +112,23 @@ exec $term -title "Primary Terminal"
     bindsym $mod+j focus down
     bindsym $mod+k focus up
     bindsym $mod+l focus right
-    # or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
+    # or use $mod+[left|down|up|right]
+    bindsym $mod+Left  focus left
+    bindsym $mod+Down  focus down
+    bindsym $mod+Up    focus up
     bindsym $mod+Right focus right
-	# or jump to urgent
+    # or jump to urgent
     bindsym $mod+x [urgent=latest] focus
 
-    # _move_ the focused window with the same, but add Shift
+    # Move the focused window itself with added Shift modifier
     bindsym $mod+Shift+h move left
     bindsym $mod+Shift+j move down
     bindsym $mod+Shift+k move up
     bindsym $mod+Shift+l move right
     # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Left  move left
+    bindsym $mod+Shift+Down  move down
+    bindsym $mod+Shift+Up    move up
     bindsym $mod+Shift+Right move right    
 #
 # Workspaces:
@@ -298,6 +287,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Brightness Control
+# Note: `light` is from the AUR
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 
@@ -307,6 +297,12 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 # Floating defaults
 #for_window [window_role="pop-up"] floating enable
 
+# Border defaults
+for_window [title=" - Firefox$"] border none
+for_window [title=" - Nightly$"] border none
+for_window [title=" - Mozilla Thunderbird$"] border none
+for_window [class="^Chrom(e|ium)$" title=" - Chrom(e|ium)$"] border none
+for_window [class="(R|r)emmina"] border none
 
 # gaps
 #new_window pixel
