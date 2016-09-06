@@ -7,8 +7,7 @@ export PYCHARM_JDK=/usr/lib/jvm/java-8-openjdk
 export _JAVA_AWT_WM_NONREPARENTING=1
 # Socket for ssh authentication
 unset SSH_AGENT_PID
-#export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
-export SSH_AUTH_SOCK="/run/user/1000/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 export ALSA_CARD=PCH
 
 # autostart gpg-agent, urxvtd and sway when logging into tty1
