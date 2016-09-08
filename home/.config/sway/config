@@ -297,9 +297,9 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 # Floating defaults
 #for_window [window_role="pop-up"] floating enable
 
-# Border defaults
-for_window [title=" - Firefox$"] border none
-for_window [title=" - Nightly$"] border none
+# Border defaults / Remove title bars
+for_window [title="^Nightly$"] border pixel 0
+for_window [title=" - Nightly$"] border pixel 0
 for_window [title=" - Mozilla Thunderbird$"] border none
 for_window [class="^Chrom(e|ium)$" title=" - Chrom(e|ium)$"] border none
 for_window [class="(R|r)emmina"] border none

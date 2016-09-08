@@ -2,9 +2,6 @@
 export WEBIDE_JDK=/usr/lib/jvm/java-8-openjdk
 export IDEA_JDK=/usr/lib/jvm/java-8-openjdk
 export PYCHARM_JDK=/usr/lib/jvm/java-8-openjdk
-# Java - ArchWiki
-# resolve "gray blob" issues
-export _JAVA_AWT_WM_NONREPARENTING=1
 # Socket for ssh authentication
 unset SSH_AGENT_PID
 export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
@@ -15,6 +12,11 @@ if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
 #    gpgconf --launch gpg-agent
     export TERM='xterm-256color'
     urxvtd -q -f -o
+    # Java - resolve "gray blob" issues on wayland
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    # QT - Use wayland backend without client side decorations
+    export QT_QPA_PLATFORM='wayland'
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION='1'
     sway -d 2> ~/sway.log
 #    gdb -batch -ex "run -d" -ex "continue" -ex "generate-core-file" /usr/bin/sway
 fi

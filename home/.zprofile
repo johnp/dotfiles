@@ -11,6 +11,6 @@ export RUST_BACKTRACE=1
 export QUOTING_STYLE=literal
 
 # source machine specific profile
-if [ -f "$HOME/.local/profile" ] ; then
+if [ -f "$HOME/.local/$HOST/profile" ] ; then
     . "$HOME/.local/$HOST/profile"
 fi
