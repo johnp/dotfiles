@@ -39,7 +39,7 @@ hide_edge_borders both
 #seamless_mouse on
 
 # Assign applications to workspaces
-#
+# (xlsclients -al)
 assign [title="^Primary Terminal$"] 1
 #assign [class="^URxvt"] 1
 # Note: 2, 3 and 4 for free use
@@ -52,7 +52,7 @@ assign [class="^IntelliJ"] 5
 assign [class="^JetBrains"] 5
 assign [title="^Remmina"] 6
 assign [title="^RDP"] 6
-assign [class="Mozilla Thunderbird$"] 7
+assign [class="^Thunderbird$"] 7
 #assign [class="^$"] 8
 #assign [title="^IRC$"] 9
 assign [class="^JDownloader"] 10
@@ -298,11 +298,10 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 #for_window [window_role="pop-up"] floating enable
 
 # Border defaults / Remove title bars
-for_window [title="^Nightly$"] border pixel 0
-for_window [title=" - Nightly$"] border pixel 0
-for_window [title=" - Mozilla Thunderbird$"] border none
-for_window [class="^Chrom(e|ium)$" title=" - Chrom(e|ium)$"] border none
-for_window [class="(R|r)emmina"] border none
+for_window [class="^Firefox$"] border pixel 0
+for_window [class="^Thunderbird$"] border pixel 0
+for_window [class="^Chrom(e|ium)$"] border pixel 0
+for_window [class="^Remmina$"] border none
 
 # gaps
 #new_window pixel

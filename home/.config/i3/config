@@ -132,11 +132,11 @@ assign [class="^PyCharm"] $workspace5
 assign [class="^PhpStorm"] $workspace5
 assign [class="^IntelliJ"] $workspace5
 assign [class="^JetBrains"] $workspace5
-assign [title="^Remmina"] $workspace6
+assign [class="^Remmina$"] $workspace6
 assign [title="^RDP"] $workspace6
-assign [class="^Thunderbird"] $workspace7
+assign [class="^Thunderbird$"] $workspace7
 #assign [class="^Sublime"] $workspace8
-assign [class="^JDownloader"] $workspace10
+assign [title="^JDownloader"] $workspace10
 
 #for_window [title="^RDP"] fullscreen
 
@@ -251,11 +251,10 @@ mode $sysmenu {
 }
 
 # app window configs
-for_window [title=" - Firefox$"] border none
-for_window [title=" - Nightly$"] border none
-for_window [title=" - Mozilla Thunderbird$"] border none
-for_window [class="^Chrom(e|ium)$" title=" - Chrom(e|ium)$"] border none
-for_window [class="(R|r)emmina"] border none
+for_window [class="^Firefox$"] border pixel 0
+for_window [class="^Thunderbird$"] border pixel 0
+for_window [class="^Chrom(e|ium)$"] border pixel 0
+for_window [class="Remmina"] border none
 
 # gaps
 #gaps edge_gaps off
