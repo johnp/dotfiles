@@ -26,3 +26,5 @@
 	gpgsign = true
 [diff]
 	compactionHeuristic = true
+[gpg]
+	program = gpg2
