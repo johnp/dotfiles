@@ -2,7 +2,7 @@
 Name=Firefox Nightly - Safe Mode
 GenericName=Web Browser - Safe Mode
 Comment=Browse the Web - Safe Mode
-Exec=firejail --shell=none --tracelog --name=browser --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
+Exec=firejail --shell=none --tracelog --name=browser --whitelist=/opt/nightly/ --whitelist=~/.tmp --read-only=~/.config/nextpage.lisp -- /opt/nightly/firefox -safe-mode %u
 Terminal=false
 Type=Application
 Icon=firefox-nightly-icon
