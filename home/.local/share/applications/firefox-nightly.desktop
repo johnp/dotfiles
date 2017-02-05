@@ -3,7 +3,7 @@ Name=Firefox Nightly
 GenericName=Web Browser
 Comment=Browse the Web
 # XXX: ptrace is used during shutdown of firefox nightly: return EPERM for now, because there's no 'append to whitelist' in firejail (seccomp.keep overwrites inbuilt whitelist)
-Exec=firejail --shell=none --name=browser --tracelog --env=JS_OPTION_USE_UNBOXED_ARRAYS=1 --env=JSGC_DISABLE_POISONING=1 --env=MOZ_QUIET=1 --seccomp.eperm=ptrace --whitelist=/opt/nightly/ --whitelist=~/.tmp --whitelist=~/Sync -- /opt/nightly/firefox %u
+Exec=firejail --shell=none --name=browser --tracelog --env=JS_OPTION_USE_UNBOXED_ARRAYS=1 --env=JSGC_DISABLE_POISONING=1 --env=MOZ_QUIET=1 --seccomp.eperm=ptrace --whitelist=/opt/nightly/ --whitelist=~/.tmp --whitelist=~/Sync --read-write=~/.config/nextpage.lisp -- /opt/nightly/firefox %u
 Path=/opt/nightly/
 Terminal=false
 Type=Application

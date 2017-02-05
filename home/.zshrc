@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# rustup completions path
+fpath+=~/.zfunc
 
 ## Dotfiles
 # andsens/homeshick
@@ -66,7 +68,7 @@ export DISABLE_VENV_CD=1
 export WORKON_HOME=~/.virtualenvs
 
 ## User configuration
-export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin"
+export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # source local .zshrc overrides
