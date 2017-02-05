@@ -1,4 +1,4 @@
-# johnp's py3status (i3status/swaybar) configuration file.
+# johnp's py3status configuration file.
 
 general {
     colors = true
@@ -6,19 +6,21 @@ general {
 }
 
 order += "disk /"
-#order += "run_watch DHCP"
 order += "ethernet vpn"
 order += "ethernet ppp0"
 order += "wireless _first_"
 order += "ethernet enp5s0f1"
 order += "ethernet enp0s31f6"
 order += "whatismyip"
-#order += "volume master"
 order += "volume_status"
-order += "battery 1"
+order += "battery_level"
 order += "cpu_temperature 0"
 order += "load"
 order += "tztime local"
+
+disk "/" {
+    format = "%avail"
+}
 
 wireless _first_ {
     format_up = "W: (%quality at %essid, %bitrate) %ip"
@@ -39,21 +41,18 @@ whatismyip {
     url = "https://api.ipify.org"
 }
 
-#volume master {
-#    format = " %volume"
-#    format_muted = " %volume"
-#	device = "default"
-#}
-
 volume_status {
     format = " {percentage}%"
     format_muted = " {percentage}%"
 }
 
-battery 1 {
-    format = "%status: %percentage %remaining"
+battery_level {
+    blocks = ""
+    format = "{icon} {percent}% {time_remaining}"
     format_down = ""
     hide_seconds = true
+    notify_low_level = true
+    threshold_bad = 5
 }
 
 #run_watch DHCP {
@@ -82,8 +81,4 @@ cpu_temperature 0 {
 
 load {
     format = "%1min %5min"
-}
-
-disk "/" {
-    format = "%avail"
 }
