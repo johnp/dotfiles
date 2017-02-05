@@ -7,7 +7,9 @@ URxvt*underlineColor: yellow
 !!URxvt*font: xft:Sauce\ Code\ Powerline:pixelsize=13:antialias=true:hinting=true
 !!URxvt*font: xft:Fura\ Mono\ for\ Powerline\ Nerd\ Font\ Complete Mono:pixelsize=13:antialias=true:hinting=true
 !!URxvt*font: xft:Fura\ Mono\ for\ Powerline\ Nerd\ Font\ Complete Mono:pixelsize=13:antialias=true:hinting=true
-URxvt*font: xft:Fura\ Mono\ for\ Powerline:pixelsize=13:antialias=true:hinting=true
+URxvt*font: xft:Fura\ Mono\ for\ Powerline:pixelsize=13:antialias=true:hinting=true, \
+            xft:Noto\ Sans\ Symbols, \
+            xft:Noto\ Sans\ Emoji
 URxvt*depth: 32
 URxvt*borderless: true
 URxvt*scrollBar: false

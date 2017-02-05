@@ -25,6 +25,9 @@ alias rm='rm -i --one-file-system'
 alias journal='journalctl -xeb'
 # overwrite lt alias for reverse sorting
 alias lt='ls -ltFhr'
+# pipe ripgrep
+alias G=' | rg -i'
+alias Gstr=' | rg -iF'
 
 # unset aliases that I don't like
 # these are ='sudo'

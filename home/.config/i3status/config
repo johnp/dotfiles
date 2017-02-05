@@ -5,10 +5,11 @@ general {
     interval = 5
 }
 
+#order += "tabbed_titles"
 order += "disk /"
 order += "ethernet vpn"
 order += "ethernet ppp0"
-order += "wireless _first_"
+order += "wifi"
 order += "ethernet enp5s0f1"
 order += "ethernet enp0s31f6"
 order += "whatismyip"
@@ -18,13 +19,29 @@ order += "cpu_temperature 0"
 order += "load"
 order += "tztime local"
 
-disk "/" {
-    format = "%avail"
+tabbed_titles {
+    always_show = true
 }
 
-wireless _first_ {
-    format_up = "W: (%quality at %essid, %bitrate) %ip"
+disk "/" {
+    format = "%avail"
+    on_click 1 = "exec thunar /"
+}
+
+ethernet vpn {
+    format_up = "VPN: %ip"
     format_down = ""
+}
+
+ethernet ppp0 {
+    format_up = "Uni-VPN: %ip"
+    format_down = ""
+}
+
+wifi {
+    format_up = "W: ({signal_percent} at {ssid}, {bitrate}) {ip}"
+    format_down = ""
+    signal_bad = 20
 }
 
 ethernet enp5s0f1 {
@@ -39,6 +56,9 @@ ethernet enp0s31f6 {
 
 whatismyip {
     url = "https://api.ipify.org"
+    cache_timeout = 600
+    format_offline = "🌍"
+    negative_cache_timeout = 10
 }
 
 volume_status {
@@ -47,26 +67,11 @@ volume_status {
 }
 
 battery_level {
-    blocks = ""
     format = "{icon} {percent}% {time_remaining}"
     format_down = ""
     hide_seconds = true
     notify_low_level = true
     threshold_bad = 5
-}
-
-#run_watch DHCP {
-#    pidfile = "/run/dhcpcd-*.pid"
-#}
-
-ethernet vpn {
-    format_up = "VPN: %ip"
-    format_down = ""
-}
-
-ethernet ppp0 {
-    format_up = "Uni-VPN: %ip"
-    format_down = ""
 }
 
 tztime local {

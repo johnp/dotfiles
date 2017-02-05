@@ -14,4 +14,7 @@ export log_file="/var/log/arch-news.log"
 #       (BACKGROUND_CHECK and move /var/log to btrfs subvolume)
 
 # Start Upgrade
+# this should be happening in a tmux session, so that we don't get killed mid-upgrade if the X server dies
+#session="archupdate"
+#tmux new -A -s $session -n $session "pacmatic -Syu $@"
 pacmatic -Syu $@

@@ -201,7 +201,7 @@ exec $term -title "Primary Terminal"
 #
 # TODO: pango!
 bar {
-         status_command py3status -c ~/.config/i3status/config
+         status_command py3status -b -c ~/.config/i3status/config
 #        position top
 #        colors {
 #            statusline #ffffff
@@ -300,6 +300,9 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 # Border defaults / Remove title bars
 for_window [class="^Firefox$"] border pixel 0
 for_window [class="^Thunderbird$"] border pixel 0
+# XXX: classes not working!
+for_window [title="Nightly$"] border pixel 0
+for_window [title="Thunderbird$"] border pixel 0
 for_window [class="^Chrom(e|ium)$"] border pixel 0
 for_window [class="^Remmina$"] border none
 
