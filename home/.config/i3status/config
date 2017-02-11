@@ -42,6 +42,7 @@ wifi {
     format_up = "W: ({signal_percent} at {ssid}, {bitrate}) {ip}"
     format_down = ""
     signal_bad = 20
+    device = 'wlp4s0'
 }
 
 ethernet enp5s0f1 {
