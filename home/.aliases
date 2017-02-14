@@ -1,5 +1,5 @@
-# arch aliases
-alias archupdate='tmux new -A -s archupdate -n archupdate _archupdate'
+# archupdate alias
+alias archupdate='tmpfile=$(mktemp /tmp/archupdate_log.XXX) ; tmux new -Ad -s archupdate -n archupdate "_archupdate | tee ${tmpfile}" \; set status off \; attach ; cat "${tmpfile}"'
 # fedora dnf aliases
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
