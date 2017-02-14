@@ -17,4 +17,6 @@ export log_file="/var/log/arch-news.log"
 # this should be happening in a tmux session, so that we don't get killed mid-upgrade if the X server dies
 #session="archupdate"
 #tmux new -A -s $session -n $session "pacmatic -Syu $@"
+
+# naïve update
 pacmatic -Syu $@

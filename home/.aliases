@@ -1,4 +1,5 @@
-
+# arch aliases
+alias archupdate='tmux new -A -s archupdate -n archupdate _archupdate'
 # fedora dnf aliases
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
