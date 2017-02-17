@@ -1,22 +1,18 @@
 #!/bin/sh
-
-# A script for updating Archlinux using pacmatic and pacaur
+# _archupdate: A script for updating Archlinux using pacmatic, pacaur and pacdiff.
+#              See the respective man-pages for their functionality.
 
 export pacman_program="pacaur --needed --devel"
 export pacdiff_program="sudo pacdiff"
 export log_file="/var/log/arch-news.log"
 
+# These two steps may be run before a transaction snapshot is (conditionally) created (e.g. by snapper)
+# Note: this is not strictly necessary, when snapper deletes no-diff snapshots
+#       (to achieve no-diff, at least /var/{cache,log,temp} should be excluded)
 # Update package database
-# sudo pacman -Sy
-# Check if there are any updates available (not including AUR)
-# sudo pacman -Qu
-# TODO: above not necessary if snapper deletes no-diff snaps
-#       (BACKGROUND_CHECK and move /var/log to btrfs subvolume)
-
-# Start Upgrade
-# this should be happening in a tmux session, so that we don't get killed mid-upgrade if the X server dies
-#session="archupdate"
-#tmux new -A -s $session -n $session "pacmatic -Syu $@"
+# pacaur -Sy
+# Check if there are any updates available (includes AUR and -git packages)
+# pacaur -Qu --devel
 
 # naïve update
 pacmatic -Syu $@

@@ -1,5 +1,3 @@
-# archupdate alias
-alias archupdate='tmpfile=$(mktemp /tmp/archupdate_log.XXX) ; tmux new -Ad -s archupdate -n archupdate "_archupdate | tee ${tmpfile}" \; set status off \; attach ; cat "${tmpfile}"'
 # fedora dnf aliases
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
@@ -30,7 +28,7 @@ alias lt='ls -ltFhr'
 alias G=' | rg -i'
 alias Gstr=' | rg -iF'
 
-# unset aliases that I don't like
+# if they are set, unset these aliases
 # these are ='sudo'
-unalias _
-unalias please
+alias _      &>/dev/null && unalias _
+alias please &>/dev/null && unalias please
