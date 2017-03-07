@@ -1,17 +1,33 @@
-#!/bin/sh
+#!/bin/zsh
+# archupdate: A tmux+zsh wrapper around _archupdate.
+#   As the shell `_archupdate` runs in could be killed, e.g. by an X server crash, this script wraps
+#   it inside a temporary tmux session, duplicates the command output into a log file which it uses to
+#   reprint the output after the temporary tmux session closed itself and clear(1)ed the screen.
 
-# A script for updating Archlinux using pacmatic and pacaur
+# Documentation:
+#   `--color always`: force color support, because isatty(1) returns false in tmux command mode
+#   `>&1`/`2>&2`: duplicate stdout/stderr (requires zsh multi_os)
+#   `&>`: interleave stdout+stderr into the log file (same)
 
-export pacman_program="pacaur --needed --devel"
-export pacdiff_program="sudo pacdiff"
-export log_file="/var/log/arch-news.log"
+tmpfile=$(mktemp /tmp/archupdate_log.XXX)
+tmux new -A -s archupdate -n archupdate '_archupdate >&1 2>&2 &> "${tmpfile}"' \; set status off
+cat "${tmpfile}"
 
-# Update package database
-# sudo pacman -Sy
-# Check if there are any updates available (not including AUR)
-# sudo pacman -Qu
-# TODO: above not necessary if snapper deletes no-diff snaps
-#       (BACKGROUND_CHECK and move /var/log to btrfs subvolume)
 
-# Start Upgrade
-pacmatic -Syu $@
+# Test for isatty(1) behaviour:
+#    cc test.c -o test
+#    `tmux new "./test > out"`
+
+# ./test.c:
+# 
+#    #include <unistd.h>
+#    #include <stdio.h>
+#
+#    main() {
+#      if (isatty(1)) {
+#        printf("\033\[31mWe are on the terminal, this is a red text\033\[m\n");
+#      } else {
+#        printf("We are not on the terminal, this is a black text\n");
+#      }
+#    }
+

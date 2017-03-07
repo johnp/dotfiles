@@ -44,7 +44,7 @@ set $workspace10 "10 "
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 0
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -202,6 +202,7 @@ bindsym $mod+r mode "resize"
 bar {
     status_command py3status -c ~/.config/i3status/config
     tray_output primary
+    font pango:DejaVu Sans Mono 8
 }
 
 # New custom bindings
@@ -251,10 +252,13 @@ mode $sysmenu {
 }
 
 # app window configs
-for_window [class="^Firefox$"] border pixel 0
-for_window [class="^Thunderbird$"] border pixel 0
-for_window [class="^Chrom(e|ium)$"] border pixel 0
+for_window [class=".*"] border pixel 0
+#for_window [class="^Firefox$"] border pixel 0
+#for_window [class="^Thunderbird$"] border pixel 0
+#for_window [class="^Chrom(e|ium)$"] border pixel 0
 for_window [class="Remmina"] border none
+
+for_window [class=".*"] title_format ""
 
 # gaps
 #gaps edge_gaps off
@@ -262,4 +266,5 @@ for_window [class="Remmina"] border none
 #gaps outer 0
 
 # autostart dunst notification daemon
-exec --no-startup-id dunst
+#exec --no-startup-id dunst
+
