@@ -20,3 +20,8 @@
     ```
     sh $HOME/.homesick/repos/dotfiles/install_plugins.sh
     ```
+5. Install diff-so-fancy (used by git)
+
+    ```
+    npm install -g diff-so-fancy
+    ```
