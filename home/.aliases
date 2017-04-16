@@ -20,13 +20,17 @@ alias uni='cd ~/Sync/Uni\ Bamberg'
 alias sudo='sudo '
 # common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
 alias rm='rm -i --one-file-system'
-# some more
+# better systemd-journal
 alias journal='journalctl -xeb'
 # overwrite lt alias for reverse sorting
 alias lt='ls -ltFhr'
-# pipe ripgrep
-alias G=' | rg -i'
-alias Gstr=' | rg -iF'
+# I'm just human
+alias du='du -sh'
+# some piping
+alias -g G=' | rg -i'
+alias -g Gstr=' | rg -iF'
+alias -g S=' | sort'
+alias -g Sh=' | sort -h'
 
 # if they are set, unset these aliases
 # these are ='sudo'
