@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # archupdate: A tmux+zsh wrapper around _archupdate.
 #   As the shell `_archupdate` runs in could be killed, e.g. by an X server crash, this script wraps
 #   it inside a temporary tmux session, duplicates the command output into a log file which it uses to
@@ -7,10 +8,10 @@
 # Documentation:
 #   `--color always`: force color support, because isatty(1) returns false in tmux command mode
 #   `>&1`/`2>&2`: duplicate stdout/stderr (requires zsh multi_os)
-#   `&>`: interleave stdout+stderr into the log file (same)
+#   `&>`: interleave stdout+stderr into the log file (requires zsh multi_os)
 
 tmpfile=$(mktemp /tmp/archupdate_log.XXX)
-tmux new -A -s archupdate -n archupdate '_archupdate >&1 2>&2 &> "${tmpfile}"' \; set status off
+tmux new -A -s archupdate -n archupdate "_archupdate --color always >&1 2>&2 &> $tmpfile" \; set status off
 cat "${tmpfile}"
 
 
