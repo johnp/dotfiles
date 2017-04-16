@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+# path to your oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 # rustup completions path
 fpath+=~/.zfunc
@@ -7,9 +7,9 @@ fpath+=~/.zfunc
 # andsens/homeshick
 if [ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-  fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
-  # check castles every other day
-  homeshick --quiet refresh 2
+  fpath+="$HOME/.homesick/repos/homeshick/completions"
+  # check castles every week
+  homeshick --quiet refresh 7
 fi
 
 ## Theme
@@ -20,24 +20,26 @@ else
   # hide user@host if $DEFAULT_USER@localhost
   DEFAULT_USER='johnp'
   if [ -d "$ZSH/custom/themes/powerlevel9k" ]; then
-    # powerlevel9k/powerlevel9k
     ZSH_THEME="powerlevel9k/powerlevel9k"
 
-    # source device-specific code points
-    # todo: add to dotfiles and combine with Xdefaults font setting
+    # source device-/font-specific code points
+    # todo: switch everything to nerdfonts
     if [ -f "$HOME/.local/$HOST/p9k" ]; then
       . "$HOME/.local/$HOST/p9k"
     fi
 
     # Powerlevel9k configuration
-    # gabrielelana/awesome-terminal-fonts
+    # bhilburn/powerlevel9k
     # ryanoasis/nerd-fonts
-    POWERLEVEL9K_MODE='awesome-fontconfig'
-    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs root_indicator)
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+    #POWERLEVEL9K_MODE='awesome-fontconfig'
+    POWERLEVEL9K_MODE='nerdfont-complete'
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs root_indicator)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time time custom_icon)
+    POWERLEVEL9K_CUSTOM_ICON="echo $'\uF300'"
     POWERLEVEL9K_STATUS_VERBOSE=true
-    POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-    POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+    #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+    #POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+    POWERLEVEL9K_SHORTEN_DELIMITER="…"
     POWERLEVEL9K_SHOW_CHANGESET=true
     POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
   else
