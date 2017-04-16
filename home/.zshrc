@@ -18,7 +18,7 @@ if [[ "$(tty)" == "/dev/tty"* ]]; then
   ZSH_THEME=""
 else
   # hide user@host if $DEFAULT_USER@localhost
-  DEFAULT_USER='johnp'
+  export DEFAULT_USER='johnp'
   if [ -d "$ZSH/custom/themes/powerlevel9k" ]; then
     ZSH_THEME="powerlevel9k/powerlevel9k"
 
