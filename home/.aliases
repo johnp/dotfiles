@@ -31,6 +31,8 @@ alias -g G=' | rg -i'
 alias -g Gstr=' | rg -iF'
 alias -g S=' | sort'
 alias -g Sh=' | sort -h'
+# clear LESS config variable for man
+alias man='LESS= man'
 
 # if they are set, unset these aliases
 # these are ='sudo'
