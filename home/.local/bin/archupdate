@@ -1,34 +1,13 @@
-#!/bin/zsh
+#!/bin/sh
 
-# archupdate: A tmux+zsh wrapper around _archupdate.
-#   As the shell `_archupdate` runs in could be killed, e.g. by an X server crash, this script wraps
-#   it inside a temporary tmux session, duplicates the command output into a log file which it uses to
-#   reprint the output after the temporary tmux session closed itself and clear(1)ed the screen.
-
-# Documentation:
-#   `--color always`: force color support, because isatty(1) returns false in tmux command mode
-#   `>&1`/`2>&2`: duplicate stdout/stderr (requires zsh multi_os)
-#   `&>`: interleave stdout+stderr into the log file (requires zsh multi_os)
+# archupdate: A tmux wrapper around _archupdate.
+#   As the shell `_archupdate` runs in could be killed, e.g. by an X server crash, this script executes
+#   it inside a temporary, via script(1) recorded tmux command session that, after it closes itself and
+#   clear(1)s the screen, is reprinted to the terminal for easy viewing in the scrollback.
+#
+#   This also conveniently resolves two issues that are caused by isatty(1) returning false when stdout
+#   is redirected, namely having no colored output unless forced manually and progress bars not working.
 
 tmpfile=$(mktemp /tmp/archupdate_log.XXX)
-tmux new -A -s archupdate -n archupdate "_archupdate --color always >&1 2>&2 &> $tmpfile" \; set status off
+tmux -u new -A -s archupdate -n archupdate "script -q -c _archupdate $tmpfile" \; set status off
 cat "${tmpfile}"
-
-
-# Test for isatty(1) behaviour:
-#    cc test.c -o test
-#    `tmux new "./test > out"`
-
-# ./test.c:
-# 
-#    #include <unistd.h>
-#    #include <stdio.h>
-#
-#    main() {
-#      if (isatty(1)) {
-#        printf("\033\[31mWe are on the terminal, this is a red text\033\[m\n");
-#      } else {
-#        printf("We are not on the terminal, this is a black text\n");
-#      }
-#    }
-
