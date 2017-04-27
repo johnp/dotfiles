@@ -52,22 +52,19 @@ HYPHEN_INSENSITIVE="true"
 # Command auto-correction.
 #ENABLE_CORRECTION="true"
 # Update oh-my-zsh every 7 days.
-export UPDATE_ZSH_DAYS=7
+UPDATE_ZSH_DAYS=7
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## Plugins
-plugins=(gitfast git-extras virtualenvwrapper colored-man-pages common-aliases extract history systemd archlinux fedora sudo man rsync zsh-syntax-highlighting alias-tips)
+plugins=(gitfast git-extras colored-man-pages common-aliases extract history systemd archlinux fedora sudo man rsync zsh-syntax-highlighting alias-tips)
 
 ## Plugin configuration
 # suggest aliases
+export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
-# disable the venv cd feature of the virtualenvwrapper plugin
-export DISABLE_VENV_CD=1
-# virtualenv home
-export WORKON_HOME=~/.virtualenvs
 
 ## User configuration
 export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
