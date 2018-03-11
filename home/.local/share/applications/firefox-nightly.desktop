@@ -2,24 +2,28 @@
 Name=Firefox Nightly
 GenericName=Web Browser
 Comment=Browse the Web
-Exec=firejail --shell=none --name=browser --tracelog --allow-debuggers --env=JSGC_DISABLE_POISONING=1 --whitelist=/opt/nightly/ --whitelist=~/.tmp --whitelist=~/Sync --read-write=~/.config/nextpage.lisp -- /opt/nightly/firefox %u
+Exec=firejail --shell=none --name=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist="~/Sync" --whitelist="~/Repos" -- /opt/nightly/firefox %u
 Path=/opt/nightly/
 Terminal=false
 Type=Application
-Icon=firefox-nightly-icon
+Icon=/opt/nightly/browser/icons/mozicon128.png
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
 StartupNotify=true
-Actions=NewTab;NewWindow;NewPrivateWindow;
+Actions=NewTab;NewWindow;NewPrivateWindow;SafeMode
 
 [Desktop Action NewTab]
 Name=Open new tab
-Exec=/opt/nightly/firefox -new-tab about:newtab
+Exec=firejail --join=browser -- /opt/nightly/firefox -new-tab about:newtab
 
 [Desktop Action NewWindow]
 Name=Open new window
-Exec=/opt/nightly/firefox -new-window
+Exec=firejail --join=browser -- /opt/nightly/firefox -new-window
 
 [Desktop Action NewPrivateWindow]
 Name=New private window
-Exec=/opt/nightly/firefox -private-window
+Exec=firejail --join=browser -- /opt/nightly/firefox -private-window
+
+[Desktop Action SafeMode]
+Name=Safe Mode
+Exec=firejail --shell=none --name=browser --tracelog --allow-debuggers --whitelist=/opt/nightly/ -- /opt/nightly/firefox -safe-mode %u
