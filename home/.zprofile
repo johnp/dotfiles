@@ -1,4 +1,4 @@
-# firefox
+# Firefox tuning environment variables
 export JSGC_DISABLE_POISONING=1
 # XXX: this causes more problems than it solves
 #export MOZ_USE_XINPUT2=1
@@ -6,6 +6,7 @@ export JSGC_DISABLE_POISONING=1
 export LESS='NiX'
 # rust
 export RUST_BACKTRACE=1
+export RUSTC_WRAPPER=sccache
 # work around coreutils bug
 # https://unix.stackexchange.com/questions/258679
 export QUOTING_STYLE=literal

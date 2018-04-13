@@ -9,7 +9,7 @@
 set $mod Mod4
 # Terminal emulator
 #set $term urxvtc
-set $term urxvt
+set $term alacritty
 # Application launcher
 set $menu j4-dmenu-desktop
 #set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
@@ -307,8 +307,8 @@ for_window [class="^Chrom(e|ium)$"] border pixel 0
 for_window [class="^Remmina$"] border none
 
 # gaps
-#new_window pixel
-#new_float pixel
+#default_border pixel
+#default_floating_border pixel
 #gaps edge_gaps off
 #gaps outer 10
 #gaps inner 10

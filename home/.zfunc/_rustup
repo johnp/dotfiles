@@ -36,6 +36,15 @@ _arguments -s -S -C \
 "1:: :_rustup_install_commands" \
 && ret=0
 ;;
+(uninstall)
+_arguments -s -S -C \
+"-h[Prints help information]" \
+"--help[Prints help information]" \
+"-V[Prints version information]" \
+"--version[Prints version information]" \
+"1:: :_rustup_uninstall_commands" \
+&& ret=0
+;;
 (update)
 _arguments -s -S -C \
 "--no-self-update[Don't perform self update when running the `rustup` command]" \
@@ -361,6 +370,16 @@ _arguments -s -S -C \
 "1:: :_rustup_which_commands" \
 && ret=0
 ;;
+(docs)
+_arguments -s -S -C \
+"--book[The Rust Programming Language book]" \
+"--std[Standard library API documentation]" \
+"-h[Prints help information]" \
+"--help[Prints help information]" \
+"-V[Prints version information]" \
+"--version[Prints version information]" \
+&& ret=0
+;;
 (doc)
 _arguments -s -S -C \
 "--book[The Rust Programming Language book]" \
@@ -541,7 +560,8 @@ _rustup_commands() {
     local commands; commands=(
         "show:Show the active and installed toolchains" \
 "install:Update Rust toolchains" \
-"update:Update Rust toolchains" \
+"uninstall:Uninstall Rust toolchains" \
+"update:Update Rust toolchains and rustup" \
 "default:Set the default toolchain" \
 "toolchain:Modify or query the installed toolchains" \
 "target:Modify a toolchain's supported targets" \
@@ -638,6 +658,20 @@ _rustup_doc_commands() {
         
     )
     _describe -t commands 'rustup doc commands' commands "$@"
+}
+(( $+functions[_docs_commands] )) ||
+_docs_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'docs commands' commands "$@"
+}
+(( $+functions[_rustup_docs_commands] )) ||
+_rustup_docs_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'rustup docs commands' commands "$@"
 }
 (( $+functions[_rustup_telemetry_enable_commands] )) ||
 _rustup_telemetry_enable_commands() {
@@ -851,7 +885,7 @@ _rustup_target_commands() {
     local commands; commands=(
         "list:List installed and available targets" \
 "add:Add a target to a Rust toolchain" \
-"remove:Remove a target  from a Rust toolchain" \
+"remove:Remove a target from a Rust toolchain" \
 "install:" \
 "uninstall:" \
 "help:Prints this message or the help of the given subcommand(s)" \
@@ -902,6 +936,13 @@ _rustup_toolchain_uninstall_commands() {
         "TOOLCHAIN:" \
     )
     _describe -t commands 'rustup toolchain uninstall commands' commands "$@"
+}
+(( $+functions[_rustup_uninstall_commands] )) ||
+_rustup_uninstall_commands() {
+    local commands; commands=(
+        "TOOLCHAIN:" \
+    )
+    _describe -t commands 'rustup uninstall commands' commands "$@"
 }
 (( $+functions[_rustup_override_unset_commands] )) ||
 _rustup_override_unset_commands() {

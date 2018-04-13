@@ -3,7 +3,7 @@
 # _archupdate: A script for updating Archlinux using pacmatic, pacaur and pacdiff.
 #              See the respective man-pages for their functionality.
 
-export pacman_program="pacaur --needed --devel"
+export pacman_program="yay --devel"
 export pacdiff_program="sudo pacdiff"
 export log_file="/var/log/arch-news.log"
 

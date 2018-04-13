@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if ip=$(/usr/bin/curl -sfgN --http2 --tlsv1.2 --no-keepalive --tcp-fastopen --retry 5 --retry-connrefused https://v6.myexternalip.com/raw); then
+  echo "$ip"
+  exit 0
+fi
+
+echo "No IPv6 internet connection"
+exit 1

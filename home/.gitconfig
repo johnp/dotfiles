@@ -25,6 +25,8 @@
 	default = simple
 [commit]
 	gpgsign = true
+[tag]
+	gpgsign = true
 [diff]
 	compactionHeuristic = true
 [gpg]

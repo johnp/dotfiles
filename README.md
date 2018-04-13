@@ -25,3 +25,8 @@
     ```
     npm install -g diff-so-fancy
     ```
+
+## TODO
+
+* [Bootstrapping](https://github.com/andsens/homeshick/wiki/Simplistic-bootstraping-script)
+* Auto-Update for oh-my-zsh plugins

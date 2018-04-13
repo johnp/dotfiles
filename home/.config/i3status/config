@@ -13,7 +13,9 @@ order += "wifi"
 order += "ethernet enp5s0f1"
 order += "ethernet enp0s31f6"
 order += "whatismyip"
-order += "volume_status"
+#order += "external_script ipv4"
+#order += "external_script ipv6"
+#order += "volume_status"
 order += "battery_level"
 order += "cpu_temperature 0"
 order += "load"
@@ -56,15 +58,25 @@ ethernet enp0s31f6 {
 }
 
 whatismyip {
-    url = "https://api.ipify.org"
-    cache_timeout = 600
-    format_offline = "🌍"
-    negative_cache_timeout = 10
+    url_geoip = "https://api.ipify.org/?format=json"
+}
+
+external_script ipv4 {
+    script_path = "getipv4"
+    cache_timeout = 120
+}
+
+external_script ipv6 {
+    script_path = "getipv6"
+    cache_timeout = 120
 }
 
 volume_status {
-    format = " {percentage}%"
-    format_muted = " {percentage}%"
+#    format = " {percentage}%"
+#    format_muted = " {percentage}%"
+    button_up = 4
+    button_down = 5
+    button_mute = 2
 }
 
 battery_level {
