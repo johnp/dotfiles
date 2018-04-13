@@ -1,7 +1,12 @@
 [user]
 	name = Johannes Pfrang
 	email = johannespfrang@gmail.com
-	signingkey = 0x3E518B72D7FEB8D1
+	# johnp-pc signing subkey
+	signingkey = 4DBF2162E803DF2A05FD61D33E518B72D7FEB8D1!
+#	signingkey = 0x3E518B72D7FEB8D1!
+	# yubikey signing subkey
+#	signingkey = 29889C1529FCFAE7D672D621A9E4BE324D605C9E!
+#	signingkey = 0xA9E4BE324D605C9E!
 
 [alias]
 	# shortcuts
