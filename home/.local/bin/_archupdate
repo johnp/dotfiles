@@ -1,19 +1,10 @@
 #!/bin/sh
 
-# _archupdate: A script for updating Archlinux using pacmatic, pacaur and pacdiff.
+# _archupdate: A script for updating Archlinux using pacmatic, yay and pacdiff.
 #              See the respective man-pages for their functionality.
 
-export pacman_program="yay --devel"
-export pacdiff_program="sudo pacdiff"
-export log_file="/var/log/arch-news.log"
+# To prevent snapper/btrbk from making nearly essentially no-diff snapshots on
+# package checks without update, these likely need to be on subvolumes or excluded
+# otherwise: /var/{cache,log,tmp}, $XDG_CACHE_HOME, $HOME/.cache
 
-# These two steps may be run before a transaction snapshot is (conditionally) created (e.g. by snapper)
-# Note: this is not strictly necessary, when snapper deletes no-diff snapshots
-#       (to achieve no-diff, at least /var/{cache,log,temp} should be excluded / on different subvolumes)
-# Update package database
-# pacaur -Sy
-# Check if there are any updates available (includes AUR and -git packages)
-# pacaur -Qu --devel
-
-# naïve update
-pacmatic -Syu $@
+pacman_program="yay --devel" pacdiff_program="sudo pacdiff" pacmatic -Syu $@
