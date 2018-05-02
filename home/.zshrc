@@ -23,25 +23,18 @@ if [[ "$(tty)" == "/dev/tty"* ]]; then
 else
   # hide user@host if $DEFAULT_USER@localhost
   export DEFAULT_USER='johnp'
-  if [ -d "$ZSH/custom/themes/powerlevel9k" ]; then
+  if [[ -d "$ZSH/custom/themes/powerlevel9k" ]]; then
 	# cost 30-40ms startup time
     ZSH_THEME="powerlevel9k/powerlevel9k"
-
-    # source device-/font-specific code points
-    # todo: switch everything to nerdfonts
-    if [ -f "$HOME/.local/$HOST/p9k" ]; then
-      . "$HOME/.local/$HOST/p9k"
-    fi
-
     # Powerlevel9k configuration
     # bhilburn/powerlevel9k
     # ryanoasis/nerd-fonts
-    #POWERLEVEL9K_MODE='awesome-fontconfig'
-    POWERLEVEL9K_MODE='nerdfont-complete'
+    if [[ -v DISPLAY ]]; then
+        POWERLEVEL9K_MODE='nerdfont-complete'
+    fi # else use the default mode (e.g. for tmux on tty)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context dir dir_writable vcs root_indicator)
     POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time custom_icon)
-    POWERLEVEL9K_CUSTOM_ICON="echo $'\uF300'"
-    POWERLEVEL9K_STATUS_VERBOSE=true
+    POWERLEVEL9K_CUSTOM_ICON="echo $'\uf303'"
     #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
     #POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
     POWERLEVEL9K_SHORTEN_DELIMITER="…"
@@ -74,8 +67,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 
 ## User configuration
-export PATH="$PATH:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
 
 # source local .zshrc overrides
 if [ -f "$HOME/.local/$HOST/zshrc" ]; then
@@ -84,6 +76,7 @@ fi
 
 # Uncomment the following line to enable profiling oh-my-zsh startup
 # ENABLE_PROFILING="true"
+
 # source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 

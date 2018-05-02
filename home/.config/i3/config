@@ -199,7 +199,8 @@ bindsym $mod+r mode "resize"
 bar {
     status_command py3status -c ~/.config/i3status/config
     tray_output primary
-    font pango:FuraMonoForPowerline Nerd Font Medium 9
+    # todo: redo powerline icons for py3status / switch to another status bar
+    font pango:FuraMono Nerd Font Mono Medium 9
 }
 
 # New custom bindings

@@ -1,7 +1,8 @@
-# JetBrains software shall use the system openjdk
-export WEBIDE_JDK=/usr/lib/jvm/intellij-jdk
+# JetBrains software shall use the Intellij JDK
 export IDEA_JDK=/usr/lib/jvm/intellij-jdk
 export PYCHARM_JDK=/usr/lib/jvm/intellij-jdk
+export CL_JDK=/usr/lib/jvm/intellij-jdk
+export WEBIDE_JDK=/usr/lib/jvm/intellij-jdk
 # Socket for ssh authentication
 unset SSH_AGENT_PID
 export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"

@@ -28,14 +28,21 @@ alias rm='rm -i --one-file-system'
 alias journal='journalctl -xeb'
 # overwrite lt alias for reverse sorting
 alias lt='ls -ltFhr'
+# alias ls stuff to exa
+alias l='exa -l --group-directories-first'
+alias ll='exa -lg --group-directories-first'
+alias la='exa -lag --group-directories-first'
+alias lm='exa -lgs modified --group-directories-first'
+alias lmr='exa -lgs modified --group-directories-first --reverse'
 # I'm just human
 alias du='du -sh'
-alias dufs='du -sh . | sort -h'
+alias dufs='du -sh * | sort -h'
 # some piping
 alias -g G=' | rg -i'
 alias -g Gstr=' | rg -iF'
 alias -g S=' | sort'
 alias -g Sh=' | sort -h'
+alias -g COPY=' | xclip -selection c'
 # clear LESS config variable for man
 alias man='LESS= man'
 

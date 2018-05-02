@@ -3,7 +3,9 @@
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*underlineColor: yellow
-URxvt*font: xft:FuraMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:hinting=true, \
+URxvt*font: xft:FuraMono\ Nerd\ Font\ Mono:pixelsize=13:antialias=true:hinting=true, \
+            xft:Hack\ Nerd\ Font:pixelsize=13:antialias=true:hinting=true, \
+            xft:FuraMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:hinting=true, \
             xft:Noto\ Sans\ Symbols, \
             xft:Noto\ Sans\ Emoji
 URxvt*depth: 32
