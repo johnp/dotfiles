@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 # This script clones custom themes and plugins for oh-my-zsh.
 # Therefore, oh-my-zsh has to be installed first.
 
