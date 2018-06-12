@@ -34,6 +34,8 @@ else
     fi # else use the default mode (e.g. for tmux on tty)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context dir dir_writable vcs root_indicator)
     POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time custom_icon)
+    POWERLEVEL9K_TIME_BACKGROUND='255'
+    POWERLEVEL9K_CUSTOM_ICON_BACKGROUND='255'
     POWERLEVEL9K_CUSTOM_ICON="echo $'\uf303'"
     #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
     #POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
@@ -97,7 +99,6 @@ export CFLAGS="-Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -
 #export CFLAGS="-std=c11 -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -Wbad-function-cast $COMMON_FLAGS"
 #export CXXFLAGS="-std=c++14 -Wmissing-declarations -Weffc++ $COMMON_FLAGS"
 #export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
-
 
 # TODO: this is probably keyboard/device-specific!
 # --> compare with .inputrc / put it someplace sane
