@@ -1,2 +1,1 @@
--f bestvideo[height<=?1080][vcodec=av1]+bestaudio/bestvideo[height<=?1080][vcodec=vp9]+bestaudio/bestvideo[height<=?1080]+bestaudio/best[vcodec=av1]/best[vcodec=vp9]/best
---no-call-home
+-f ((bestvideo[vcodec^=av1]/bestvideo[vcodec^=vp9]/bestvideo)[height<=1080][height>720]/(bestvideo[vcodec^=av1]/bestvideo[vcodec^=vp9]/bestvideo)[height=720]/bestvideo[vcodec^=av1]/bestvideo[vcodec^=vp9]/bestvideo)+(bestaudio[acodec=opus]/bestaudio)/best[vcodec^=av1]/best[vcodec^=vp9]/best
