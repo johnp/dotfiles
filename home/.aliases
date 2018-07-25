@@ -42,9 +42,16 @@ alias -g G=' | rg -i'
 alias -g Gstr=' | rg -iF'
 alias -g S=' | sort'
 alias -g Sh=' | sort -h'
-alias -g COPY=' | xclip -selection c'
+# some shortcuts
+alias copy='xclip -selection c'
 # clear LESS config variable for man
 alias man='LESS= man'
+# fun
+alias pikachu='pikaur -Syu --devel --needed --keepbuild'
+alias ytdlF='youtube-dl -F'
+alias ytdllf='youtube-dl -F'
+alias ytdlgf='youtube-dl --get-format'
+alias mpvs='mpv --profile=stream'
 
 # if they are set, unset these aliases
 # these are ='sudo'
