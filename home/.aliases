@@ -52,6 +52,8 @@ alias ytdlF='youtube-dl -F'
 alias ytdllf='youtube-dl -F'
 alias ytdlgf='youtube-dl --get-format'
 alias mpvs='mpv --profile=stream'
+alias mpvs720p='mpv --profile=stream --ytdl-format=720p'
+alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
 
 # if they are set, unset these aliases
 # these are ='sudo'
