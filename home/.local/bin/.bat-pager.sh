@@ -1,2 +1,2 @@
 #!/bin/sh
-less --tabs 4 -RF "$@"
+LESSSECURE=1 less --tabs 4 -RnF "$@"
