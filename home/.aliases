@@ -1,3 +1,5 @@
+# systemd
+alias sc='systemctl -l --no-pager'
 # fedora dnf aliases
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
@@ -26,14 +28,13 @@ alias dmesg='sudo dmesg -H'
 alias rm='rm -i --one-file-system'
 # better systemd-journal
 alias journal='journalctl -xeb'
-# overwrite lt alias for reverse sorting
-alias lt='ls -ltFhr'
-# alias ls stuff to exa
-alias l='exa -l --group-directories-first'
+# <3 exa
+alias l='exa --group-directories-first'
 alias ll='exa -lg --group-directories-first'
-alias la='exa -lag --group-directories-first'
+alias la='exa -laag --group-directories-first'
 alias lm='exa -lgs modified --group-directories-first'
 alias lmr='exa -lgs modified --group-directories-first --reverse'
+alias lt='exa -lgT'
 # I'm just human
 alias du='du -sh'
 alias dufs='du -sh * | sort -h'
@@ -53,10 +54,10 @@ alias ytdllf='youtube-dl -F'
 alias ytdlgf='youtube-dl --get-format'
 alias mpvs='mpv --profile=stream'
 alias mpvs720p='mpv --profile=stream --ytdl-format=720p'
+alias mpvjp='mpv --profile=jp'
 alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
 # minimum light setting on laptop
 alias minlight='light -S 0.54'
-
 # if they are set, unset these aliases
 # these are ='sudo'
 alias _      &>/dev/null && unalias _
