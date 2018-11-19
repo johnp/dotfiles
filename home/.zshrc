@@ -33,7 +33,7 @@ else
         POWERLEVEL9K_MODE='nerdfont-complete'
     fi # else use the default mode (e.g. for tmux on tty)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context dir dir_writable vcs root_indicator)
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time custom_icon)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time virtualenv custom_icon)
     POWERLEVEL9K_TIME_BACKGROUND='255'
     POWERLEVEL9K_CUSTOM_ICON_BACKGROUND='255'
     POWERLEVEL9K_CUSTOM_ICON="echo $'\uf303'"
@@ -69,7 +69,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 
 ## User configuration
-export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin"
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
 
 # source local .zshrc overrides
 if [ -f "$HOME/.local/$HOST/zshrc" ]; then
