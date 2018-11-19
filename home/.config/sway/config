@@ -11,8 +11,8 @@ set $mod Mod4
 #set $term urxvtc
 set $term alacritty
 # Application launcher
-#set $menu j4-dmenu-desktop
-set $menu dmenu
+set $menu j4-dmenu-desktop
+#set $menu dmenu
 #set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
 #set $menu j4-dmenu-desktop -d 'rofi -dmenu -i -p \"run:\"'
 # Preferred font
@@ -33,8 +33,9 @@ set $slock swaylock -c 1C1C1C
 
 ### Global settings
 #
-# titlebar and no edge borders
-border normal 2
+# no titlebar or borders
+default_border none
+default_floating_border none
 hide_edge_borders both
 # multi-monitor mouse
 #seamless_mouse on
@@ -109,10 +110,10 @@ exec $term -title "Primary Terminal"
 # Moving around:
 #
     # Move your focus around with $mod+[h|j|k|l], like vim
-    bindsym $mod+h focus left
-    bindsym $mod+j focus down
-    bindsym $mod+k focus up
-    bindsym $mod+l focus right
+    #bindsym $mod+h focus left
+    #bindsym $mod+j focus down
+    #bindsym $mod+k focus up
+    #bindsym $mod+l focus right
     # or use $mod+[left|down|up|right]
     bindsym $mod+Left  focus left
     bindsym $mod+Down  focus down
@@ -214,6 +215,7 @@ bar {
 #
 # Input devices:
 #
+# TODO: move to device config
 input 2:7:SynPS/2_Synaptics_TouchPad {
         tap enabled
         click_method button_areas
@@ -223,9 +225,9 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
 }
 
 # Resize window
-set $resize "resize: 'jkl,' or arrow keys"
-bindsym $mod+r mode $resize
-
+# issue #3146
+#set $resize 'resize:\ jkl,\ or\ arrow\ keys'
+set $resize 'resize/borders'
 mode $resize {
     # Pressing left will shrink the window’s width.
     # Pressing right will grow the window’s width.
@@ -242,22 +244,29 @@ mode $resize {
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
 
+    # border modification
+    bindsym b border toggle
+    bindsym n border none
+    bindsym m border normal
+    bindsym c border csd
+
     bindsym Return  mode "default"
     bindsym Escape  mode "default"
     bindsym q       mode "default"
 }
+bindsym $mod+r mode $resize
 
 # Lockscreen
-bindsym $mod+o exec --no-startup-id $slock
+bindsym $mod+l exec --no-startup-id $slock
 
 # Shutdown menu
-set $sysmenu "system:  [r]eload  l[o]ck  [l]ogout  [p]oweroff  re[b]oot"
+set $sysmenu "system:  [r]eload  [l]ock  [e]xit  [p]oweroff  re[b]oot"
 bindsym $mod+Pause      mode $sysmenu
 
 mode $sysmenu {
     bindsym r         restart
-    bindsym o         exec --no-startup-id $slock, mode "default"
-    bindsym l         exit
+    bindsym l         exec --no-startup-id $slock, mode "default"
+    bindsym e         exit
     bindsym p         exec systemctl poweroff
     bindsym b         exec systemctl reboot
 
@@ -299,20 +308,11 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 #for_window [window_role="pop-up"] floating enable
 
 # Border defaults / Remove title bars
-for_window [class="^Firefox$"] border pixel 0
-for_window [class="^Thunderbird$"] border pixel 0
-# XXX: classes not working!
-for_window [title="Nightly$"] border pixel 0
-for_window [title="Thunderbird$"] border pixel 0
-for_window [class="^Chrom(e|ium)$"] border pixel 0
-for_window [class="^Remmina$"] border none
-
-# gaps
-#default_border pixel
-#default_floating_border pixel
-#gaps edge_gaps off
-#gaps outer 10
-#gaps inner 10
+for_window [class="Firefox"] border csd
+for_window [class="Nightly"] border csd
+for_window [class="Thunderbird"] border csd
+#for_window [class="^Chrom(e|ium)$"] border csd
+for_window [class="Remmina"] border none
 
 # Dynamic Gaps configuration
 set $mode_gaps Gaps: (o) outer, (i) inner

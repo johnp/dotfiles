@@ -12,7 +12,7 @@ order += "ethernet ppp0"
 order += "wifi"
 order += "ethernet enp5s0f1"
 order += "ethernet enp0s31f6"
-order += "whatismyip"
+#order += "whatismyip"
 #order += "external_script ipv4"
 #order += "external_script ipv6"
 #order += "volume_status"
@@ -57,9 +57,9 @@ ethernet enp0s31f6 {
     format_down = ""
 }
 
-whatismyip {
-    url_geoip = "https://api.ipify.org/?format=json"
-}
+#whatismyip {
+#    url_geoip = "https://api.ipify.org/?format=json"
+#}
 
 external_script ipv4 {
     script_path = "getipv4"

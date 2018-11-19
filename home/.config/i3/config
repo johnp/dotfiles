@@ -213,6 +213,9 @@ set $updatepy3vol py3-cmd refresh volume_status
 # lock screen
 bindsym $mod+l exec i3lock -c 1C1C1C
 
+# Screenshot
+bindsym Print exec scrot -u '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Screenshots/'
+
 ## Laptop keys
 
 # Pulse Audio controls (not using that one for now)

@@ -11,7 +11,6 @@
   # check the local terminfo database and use 'alacritty' if it is
   # available, otherwise 'xterm-256color' is used.
   #
-  #TERM: xterm-256color
   #TERM: alacritty-256color
 
 window:
@@ -28,15 +27,15 @@ window:
   # Blank space added around the window in pixels. This padding is not scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   # Window decorations
   #
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  decorations: full
+  decorations: none
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -45,7 +44,7 @@ scrolling:
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
-  multiplier: 3
+  multiplier: 4
 
   # Faux Scrolling
   #
@@ -54,7 +53,7 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  faux_multiplier: 4
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -66,7 +65,7 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
+tabspaces: 4
 
 # Font configuration (changes require restart)
 #
@@ -126,23 +125,10 @@ font:
     x: 0
     y: 0
 
-  # Scale the font size based on the monitor's DPI. This will lead to bigger text on HiDPI
-  # screens and make reading text a little easier.
-  # On X11 it is possible to change the DPI for each instance of alacritty by using
-  # `WINIT_HIDPI_FACTOR=1.0 alacritty` to scale the font.
-  scale_with_dpi: true
-
 # Display the time it takes to redraw each frame.
 render_timer: false
 
-# Use custom cursor colors. If `true`, the `colors.cursor.foreground` and
-# `colors.cursor.background` colors will be used to display the cursor.
-# Otherwise the cell colors are inverted for the cursor.
-custom_cursor_colors: false
-
-# If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
-
 # Colors (Tomorrow Night Bright)
 colors:
   # Default colors
@@ -276,9 +262,8 @@ selection:
   # clipboard.
   save_to_clipboard: false
 
-dynamic_title: true
-
-hide_cursor_when_typing: false
+# keep title simple
+dynamic_title: false
 
 # Cursor style
 #
@@ -290,10 +275,10 @@ cursor_style: Block
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
-unfocused_hollow_cursor: true
+cursor.unfocused_hollow: true
 
 # Live config reload (changes require restart)
-live_config_reload: true
+live_config_reload: false
 
 # Shell
 #
