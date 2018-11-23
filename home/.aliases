@@ -10,8 +10,6 @@ alias dnfdtd='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -
 alias dnfdtdr='sudo dnf distro-sync --enablerepo=updates-testing --downloadonly -y --refresh --allowerasing'
 alias karma='fedora-easy-karma --fas-username=johnp117'
 alias karma-update='fedora-easy-karma --fas-username=johnp117 --include-commented'
-# plasma wayland session
-alias plasma='startplasmacompositor'
 # gpg -> gpg2
 alias gpg='gpg2 --expert'
 # locally checked out repositories
@@ -20,8 +18,6 @@ alias repos='cd ~/Repos'
 alias work='cd ~/Sync/Work'
 alias projects='cd ~/Sync/Projects'
 alias uni='cd ~/Sync/Uni\ Bamberg'
-# sudo alias fix
-alias sudo='sudo '
 # dmesg
 alias dmesg='sudo dmesg -H'
 # common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
