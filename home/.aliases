@@ -1,6 +1,8 @@
 # systemd
 alias sc='systemctl -l --no-pager'
 # fedora dnf aliases
+alias dnfs='sudo dnf search'
+alias dnfp='sudo dnf info'
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
 alias dnfit='sudo dnf install --enablerepo=updates-testing'
 alias dnfutd='sudo dnf upgrade --enablerepo=updates-testing --downloadonly -y'
@@ -31,14 +33,15 @@ alias la='exa -laag --group-directories-first'
 alias lm='exa -lgs modified --group-directories-first'
 alias lmr='exa -lgs modified --group-directories-first --reverse'
 alias lt='exa -lgT'
-# I'm just human
+# TODO: replace with sharkdp/diskus
 alias du='du -sh'
 alias dufs='du -sh * | sort -h'
 # some piping
-alias -g G=' | rg -i'
-alias -g Gstr=' | rg -iF'
-alias -g S=' | sort'
-alias -g Sh=' | sort -h'
+alias -g G='| rg -i'
+alias -g Gstr='| rg -iF'
+alias -g S='| sort'
+alias -g Sh='| sort -h'
+alias -g B='| bat'
 # some shortcuts
 alias copy='xclip -selection c'
 # clear LESS config variable for man
@@ -54,7 +57,12 @@ alias mpvjp='mpv --profile=jp'
 alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
 # minimum light setting on laptop
 alias minlight='light -S 0.54'
-# if they are set, unset these aliases
+
+# if they are set (e.g. by common-aliases), unset these aliases
 # these are ='sudo'
 alias _      &>/dev/null && unalias _
 alias please &>/dev/null && unalias please
+# sharkdp/fd (fd-find) is better, so use it if installed
+if command -pv fd &>/dev/null; then
+  alias fd &>/dev/null && unalias fd
+fi

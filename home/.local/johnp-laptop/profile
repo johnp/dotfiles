@@ -1,18 +1,15 @@
-# JetBrains software shall use the Intellij JDK
+# JetBrains software shall use the IntelliJ JDK
 export IDEA_JDK=/usr/lib/jvm/intellij-jdk
 export PYCHARM_JDK=/usr/lib/jvm/intellij-jdk
 export CL_JDK=/usr/lib/jvm/intellij-jdk
 export WEBIDE_JDK=/usr/lib/jvm/intellij-jdk
-# Socket for ssh authentication
-unset SSH_AGENT_PID
-export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+# set default PCM for ALSA
 export ALSA_CARD=PCH
 
-# autostart gpg-agent, urxvtd and sway when logging into tty1
+# autostart sway when logging into tty1
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
-#    gpgconf --launch gpg-agent
-    export TERM='xterm-256color'
-    urxvtd -q -f -o
+    #export TERM='xterm-256color'
+    #urxvtd -q -f -o
     # Java - resolve "gray blob" issues on wayland
     export _JAVA_AWT_WM_NONREPARENTING=1
     # QT - Use wayland backend without client side decorations

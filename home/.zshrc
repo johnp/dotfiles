@@ -2,18 +2,17 @@ if [[ -v ZSH_PROF ]]; then
   zmodload zsh/zprof
 fi
 
-# path to your oh-my-zsh installation
+# path to my oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
-# rustup completions path
+# load rustup/pipenv completions
 fpath+="$HOME/.zfunc"
 
-## Dotfiles
-# andsens/homeshick
+## Dotfiles (andsens/homeshick)
 if [ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]; then
   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
   fpath+="$HOME/.homesick/repos/homeshick/completions"
   # check castles every week (costs ~30ms startup time if called synchronously)
-  (homeshick -qb refresh 7 &)
+  #(homeshick -qb refresh 7 &) # better do this manually
 fi
 
 ## Theme
@@ -24,7 +23,7 @@ else
   # hide user@host if $DEFAULT_USER@localhost
   export DEFAULT_USER='johnp'
   if [[ -d "$ZSH/custom/themes/powerlevel9k" ]]; then
-	# cost 30-40ms startup time
+	# loading the theme costs 30-40ms startup time
     ZSH_THEME="powerlevel9k/powerlevel9k"
     # Powerlevel9k configuration
     # bhilburn/powerlevel9k
@@ -53,7 +52,6 @@ HYPHEN_INSENSITIVE="true"
 #ENABLE_CORRECTION="true"
 # Update oh-my-zsh every 7 days.
 UPDATE_ZSH_DAYS=7
-# Do not prompt for update for now
 DISABLE_UPDATE_PROMPT="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -61,7 +59,9 @@ DISABLE_UPDATE_PROMPT="true"
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## Plugins
-plugins=(gitfast git-extras colored-man-pages common-aliases extract history systemd archlinux fedora sudo man rsync alias-tips zsh-syntax-highlighting)
+plugins=(gitfast git-extras colored-man-pages common-aliases extract history \
+ systemd archlinux dnf gpg-agent sudo man rsync django rust cargo \
+ alias-tips zsh-syntax-highlighting)
 
 ## Plugin configuration
 # suggest aliases
@@ -71,7 +71,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 ## User configuration
 export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
 
-# source local .zshrc overrides
+# source host-specific .zshrc overrides
 if [ -f "$HOME/.local/$HOST/zshrc" ]; then
     source "$HOME/.local/$HOST/zshrc"
 fi
@@ -88,10 +88,6 @@ unsetopt nomatch
 # source custom aliases
 source "$HOME/.aliases"
 
-# gpg-agent
-GPG_TTY=$(tty)
-export GPG_TTY
-
 # some default compiler & linker options
 #export CPPFLAGS="-D_FORTIFY_SOURCE=2"
 COMMON_FLAGS="-Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -Wstrict-overflow=2 -Wfloat-equal -Wdouble-promotion -Wcast-qual -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wpadded -Wunsafe-loop-optimizations -Wno-aggressive-loop-optimizations -Wwrite-strings -Wredundant-decls -Og -fno-plt -fstack-check -pipe -fstack-protector-strong"
@@ -104,3 +100,9 @@ export CFLAGS="-Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -
 # --> compare with .inputrc / put it someplace sane
 bindkey '^[Od' backward-word
 bindkey '^[Oc' forward-word
+
+# euank/pazi directory autojumper
+if command -v pazi &>/dev/null; then
+  eval "$(pazi init zsh)"
+fi
+
