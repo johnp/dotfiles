@@ -15,6 +15,10 @@ if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
     # QT - Use wayland backend without client side decorations
     export QT_QPA_PLATFORM='wayland'
     export QT_WAYLAND_DISABLE_WINDOWDECORATION='1'
-    sway -d 2> ~/sway.log
+    # set keyboard layout(s) for sway
+    export XKB_DEFAULT_LAYOUT=us,de
+    export XKB_DEFAULT_VARIANT=altgr-intl,
+    export XKB_DEFAULT_OPTIONS=grp:win_space_toggle
+    exec sway -d 2> ~/sway.log
 #    gdb -batch -ex "run -d" -ex "continue" -ex "generate-core-file" /usr/bin/sway
 fi
