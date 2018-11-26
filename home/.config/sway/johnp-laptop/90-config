@@ -1,5 +1,17 @@
 # Laptop configuration
 
+# Idle / Suspend / Lock
+set $minlight 'light -S 0.54'
+# TODO: (save) minlight before lock (unless suspend) & restore light on unlock
+exec swayidle \
+    timeout 540 "$minlight" \
+        resume 'light -S 100' \
+    timeout 600 "$slock" \
+    timeout 630 'swaymsg "output eDP-1 dpms off"' \
+        resume 'swaymsg "output eDP-1 dpms on"' \
+    before-sleep "$slock ; psd resync"
+
+
 # autostart gpg-agent
 exec --no-startup-id gpgconf --launch gpg-agent
 

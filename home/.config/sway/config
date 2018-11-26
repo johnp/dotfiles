@@ -27,7 +27,8 @@ set $slock swaylock -c 1C1C1C
 #
 # Example output configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+output eDP-1 resolution 1920x1080 position 0,0
+output HDMI-A-1 resolution 1920x1200 position 1920,0
 #
 # You can get the names of your outputs by running `swaymsg -t get_outputs`
 
@@ -35,7 +36,7 @@ set $slock swaylock -c 1C1C1C
 #
 # no titlebar or borders
 default_border none
-default_floating_border none
+#default_floating_border none
 hide_edge_borders both
 # multi-monitor mouse
 #seamless_mouse on
@@ -260,12 +261,14 @@ bindsym $mod+r mode $resize
 bindsym $mod+l exec --no-startup-id $slock
 
 # Shutdown menu
-set $sysmenu "system:  [r]eload  [l]ock  [e]xit  [p]oweroff  re[b]oot"
+set $sysmenu "system:  [r]eload  [l]ock  [e]xit [s]uspend  [p]oweroff  re[b]oot"
 bindsym $mod+Pause      mode $sysmenu
 
 mode $sysmenu {
     bindsym r         restart
+    # TODO: minlight on lock; restore on unlock (?)
     bindsym l         exec --no-startup-id $slock, mode "default"
+    bindsym s         exec systemctl suspend, mode "default"
     bindsym e         exit
     bindsym p         exec systemctl poweroff
     bindsym b         exec systemctl reboot
@@ -310,6 +313,7 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 # Border defaults / Remove title bars
 for_window [class="Firefox"] border csd
 for_window [class="Nightly"] border csd
+#for_window [window_role="browser"] border none
 for_window [class="Thunderbird"] border csd
 #for_window [class="^Chrom(e|ium)$"] border csd
 for_window [class="Remmina"] border none
