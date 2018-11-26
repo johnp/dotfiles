@@ -2,7 +2,7 @@
 Name=Firefox Nightly
 GenericName=Web Browser
 Comment=Browse the Web
-Exec=firejail --shell=none --name=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist="~/Sync" --whitelist="~/Repos" -- /opt/nightly/firefox %u
+Exec=firejail --shell=none --name=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
 Path=/opt/nightly/
 Terminal=false
 Type=Application
@@ -26,4 +26,4 @@ Exec=firejail --join=browser -- /opt/nightly/firefox -private-window
 
 [Desktop Action SafeMode]
 Name=Safe Mode
-Exec=firejail --shell=none --name=browser --tracelog --allow-debuggers --whitelist=/opt/nightly/ -- /opt/nightly/firefox -safe-mode %u
+Exec=firejail --shell=none --name=browser-save-mode --tracelog --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
