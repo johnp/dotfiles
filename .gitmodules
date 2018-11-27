@@ -1,6 +1,3 @@
 [submodule "home/.local/share/nano"]
 	path = home/.local/share/nano
 	url = https://github.com/scopatz/nanorc.git
-[submodule "gdb-dashboard"]
-	path = gdb-dashboard
-	url = https://github.com/cyrus-and/gdb-dashboard.git
