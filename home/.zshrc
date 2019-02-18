@@ -2,6 +2,16 @@ if [[ -v ZSH_PROF ]]; then
   zmodload zsh/zprof
 fi
 
+# zsh-lovers(1) stuff
+zstyle ':completion:*' cache-path ~/.cache/zcompcache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
 # path to my oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 # load rustup/pipenv completions
@@ -60,16 +70,21 @@ DISABLE_UPDATE_PROMPT="true"
 
 ## Plugins
 plugins=(gitfast git-extras colored-man-pages common-aliases extract history \
- systemd archlinux dnf gpg-agent sudo man rsync django rust cargo \
- alias-tips zsh-syntax-highlighting)
+ systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang \
+ alias-tips history-search-multi-word fast-syntax-highlighting)
+# zsh-autosuggestions)
 
 ## Plugin configuration
 # suggest aliases
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
+#export ZSH_PLUGINS_ALIAS_TIPS_REVEAL=1 # demo mode
 
 ## User configuration
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"
+
+# golang
+export GOPATH=${GOPATH-~/go}
 
 # source host-specific .zshrc overrides
 if [ -f "$HOME/.local/$HOST/zshrc" ]; then
