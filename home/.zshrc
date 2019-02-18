@@ -69,7 +69,7 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 
 ## User configuration
-export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/go/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"
 
 # source host-specific .zshrc overrides
 if [ -f "$HOME/.local/$HOST/zshrc" ]; then
@@ -80,21 +80,34 @@ fi
 # ENABLE_PROFILING="true"
 
 # source oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # disable zsh wildcards
 unsetopt nomatch
 
+# history
+setopt HIST_EXPIRE_DUPS_FIRST
+
 # source custom aliases
 source "$HOME/.aliases"
 
+# gpg-agent workaround for ssh/scp
+ssh() {
+  gpg-connect-agent updatestartuptty /bye
+  env ssh $*
+}
+scp() {
+  gpg-connect-agent updatestartuptty /bye
+  env scp $*
+}
+
 # some default compiler & linker options
 #export CPPFLAGS="-D_FORTIFY_SOURCE=2"
-COMMON_FLAGS="-Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -Wstrict-overflow=2 -Wfloat-equal -Wdouble-promotion -Wcast-qual -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wpadded -Wunsafe-loop-optimizations -Wno-aggressive-loop-optimizations -Wwrite-strings -Wredundant-decls -Og -fno-plt -fstack-check -pipe -fstack-protector-strong"
+COMMON_FLAGS="-march=native -Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -Wstrict-overflow=2 -Wfloat-equal -Wdouble-promotion -Wcast-qual -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wpadded -Wunsafe-loop-optimizations -Wno-aggressive-loop-optimizations -Wwrite-strings -Wredundant-decls -Og -fno-plt -fstack-check -pipe -fstack-protector-strong"
 export CFLAGS="-Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -Wbad-function-cast $COMMON_FLAGS"
-#export CFLAGS="-std=c11 -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -Wbad-function-cast $COMMON_FLAGS"
-#export CXXFLAGS="-std=c++14 -Wmissing-declarations -Weffc++ $COMMON_FLAGS"
-#export LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
+export MYCFLAGS="-std=c17 $CFLAGS"
+export MYCXXFLAGS="-std=c++17 -Wmissing-declarations -Weffc++ $COMMON_FLAGS"
+export MYLDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 
 # TODO: this is probably keyboard/device-specific!
 # --> compare with .inputrc / put it someplace sane
@@ -105,4 +118,3 @@ bindkey '^[Oc' forward-word
 if command -v pazi &>/dev/null; then
   eval "$(pazi init zsh)"
 fi
-
