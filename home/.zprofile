@@ -1,5 +1,9 @@
 # disable firefox nightly default debug option
 export JSGC_DISABLE_POISONING=1
+# enable the firefox wayland backend
+export MOZ_ENABLE_WAYLAND=1
+# make firefox use the xdg-desktop-portal for file manager integration
+#export GTK_USE_PORTAL=1
 # XXX: this causes more problems than it solves
 #export MOZ_USE_XINPUT2=1
 # less

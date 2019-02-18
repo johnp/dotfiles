@@ -15,18 +15,15 @@
     ```
     $HOME/.homesick/repos/homeshick/bin/homeshick clone johnp/dotfiles
     ```
-4. Install oh-my-zsh plugins\
+4. Install oh-my-zsh plugins
 
     ```
     sh $HOME/.homesick/repos/dotfiles/install_plugins.sh
     ```
-5. Install diff-so-fancy (used by git)
-
-    ```
-    npm install -g diff-so-fancy
-    ```
+5. Install diff-so-fancy (used for git diffs) via package manager or npm.
 
 ## TODO
 
 * [Bootstrapping](https://github.com/andsens/homeshick/wiki/Simplistic-bootstraping-script)
 * Auto-Update for oh-my-zsh plugins
+* Check out getantibody/antibody

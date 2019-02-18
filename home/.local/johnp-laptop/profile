@@ -8,7 +8,6 @@ export ALSA_CARD=PCH
 
 # autostart sway when logging into tty1
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
-    #export TERM='xterm-256color'
     #urxvtd -q -f -o
     # Java - resolve "gray blob" issues on wayland
     export _JAVA_AWT_WM_NONREPARENTING=1
@@ -19,6 +18,6 @@ if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
     export XKB_DEFAULT_LAYOUT=us,de
     export XKB_DEFAULT_VARIANT=altgr-intl,
     export XKB_DEFAULT_OPTIONS=grp:win_space_toggle
-    exec sway -d 2> ~/sway.log
-#    gdb -batch -ex "run -d" -ex "continue" -ex "generate-core-file" /usr/bin/sway
+    sway -d &> "/tmp/sway `date '+%F %H:%M:%S'`.log"
+    #exec gdb -batch -ex "run -d &> ~/sway.log" -ex "continue" -ex "generate-core-file" /usr/bin/sway
 fi

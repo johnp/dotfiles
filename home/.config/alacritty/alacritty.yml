@@ -266,11 +266,11 @@ dynamic_title: true
 
 # Cursor style
 #
-# Values for 'cursor_style':
+# Values for 'cursor.style':
 #   - Block
 #   - Underline
 #   - Beam
-cursor_style: Block
+cursor.style: Block
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.

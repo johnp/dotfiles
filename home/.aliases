@@ -1,6 +1,10 @@
 # systemd
 alias sc='systemctl -l --no-pager'
-# fedora dnf aliases
+# git
+alias gsu='git submodule update --remote --merge'
+# arch
+alias piku='pikaur -Syu --devel --needed'
+# fedora/dnf
 alias dnfs='sudo dnf search'
 alias dnfp='sudo dnf info'
 alias dnfut='sudo dnf upgrade --enablerepo=updates-testing'
@@ -14,18 +18,19 @@ alias karma='fedora-easy-karma --fas-username=johnp117'
 alias karma-update='fedora-easy-karma --fas-username=johnp117 --include-commented'
 # gpg -> gpg2
 alias gpg='gpg2 --expert'
-# locally checked out repositories
+# local repositories
 alias repos='cd ~/Repos'
-# aliases for syncthing folders
+# syncthing folders
 alias work='cd ~/Sync/Work'
 alias projects='cd ~/Sync/Projects'
 alias uni='cd ~/Sync/Uni\ Bamberg'
-# dmesg
-alias dmesg='sudo dmesg -H'
-# common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
-alias rm='rm -i --one-file-system'
-# better systemd-journal
+# clear LESS config variable for man
+alias man='LESS= man'
+# system logs
 alias journal='journalctl -xeb'
+alias dmesg='sudo dmesg -H'
+# fast restart
+alias kexec-restart='sudo systemctl start kexec.target --job-mode=replace-irreversible'
 # <3 exa
 alias l='exa --group-directories-first'
 alias ll='exa -lg --group-directories-first'
@@ -36,25 +41,24 @@ alias lt='exa -lgT'
 # TODO: replace with sharkdp/diskus
 alias du='du -sh'
 alias dufs='du -sh * | sort -h'
-# some piping
+# common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
+alias rm='rm -i --one-file-system'
+# piping
 alias -g G='| rg -i'
 alias -g Gstr='| rg -iF'
 alias -g S='| sort'
 alias -g Sh='| sort -h'
 alias -g B='| bat'
-# some shortcuts
+# various stuff
 alias copy='xclip -selection c'
-# clear LESS config variable for man
-alias man='LESS= man'
-# fun
-alias pikachu='pikaur -Syu --devel --needed --keepbuild'
+alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
+# media
 alias ytdlF='youtube-dl -F'
 alias ytdllf='youtube-dl -F'
 alias ytdlgf='youtube-dl --get-format'
 alias mpvs='mpv --profile=stream'
 alias mpvs720p='mpv --profile=stream --ytdl-format=720p'
 alias mpvjp='mpv --profile=jp'
-alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
 # minimum light setting on laptop
 alias minlight='light -S 0.54'
 

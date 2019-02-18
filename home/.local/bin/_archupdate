@@ -7,4 +7,4 @@
 # package checks without update, these likely need to be on subvolumes or excluded
 # otherwise: /var/{cache,log,tmp}, $XDG_CACHE_HOME, $HOME/.cache
 
-pacman_program="yay --devel" pacdiff_program="sudo pacdiff" pacmatic -Syu $@
+pacman_program="yay -w --devel" pacdiff_program="sudo pacdiff" pacmatic -Syu $@
