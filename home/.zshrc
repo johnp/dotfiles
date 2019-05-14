@@ -109,7 +109,11 @@ source "$HOME/.aliases"
 # gpg-agent workaround for ssh/scp
 ssh() {
   gpg-connect-agent updatestartuptty /bye
-  env ssh $*
+  if [[ "$TERM" == "alacritty" ]]; then
+    env TERM=xterm-256color ssh $*
+  else
+    env ssh $*
+  fi
 }
 scp() {
   gpg-connect-agent updatestartuptty /bye
@@ -132,4 +136,9 @@ bindkey '^[Oc' forward-word
 # euank/pazi directory autojumper
 if command -v pazi &>/dev/null; then
   eval "$(pazi init zsh)"
+fi
+
+# virtualenvwrapper
+if [ -f "/usr/bin/virtualenvwrapper_lazy.sh" ]; then
+  source /usr/bin/virtualenvwrapper_lazy.sh
 fi

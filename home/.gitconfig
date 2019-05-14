@@ -16,7 +16,7 @@
 	branches = branch -a
 	remotes = remote -v
 	amend = commit --amend --reuse-message=HEAD
-    patch = !git --no-pager diff --no-color
+	patch = !git --no-pager diff --no-color
 
 [apply]
 	# Detect whitespace errors when applying a patch
@@ -37,4 +37,5 @@
 [gpg]
 	program = gpg2
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+	pager = diff-so-fancy | less --tabs=4 -RFXi --pattern '^(Date|added|deleted|modified): '
+	excludesfile = /home/johnp/.gitignore_global
