@@ -69,8 +69,8 @@ DISABLE_UPDATE_PROMPT="true"
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## Plugins
-plugins=(gitfast git-extras colored-man-pages common-aliases extract history \
- systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang \
+plugins=(git gitfast git-extras colored-man-pages common-aliases extract history \
+ systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang ripgrep \
  alias-tips history-search-multi-word fast-syntax-highlighting)
 # zsh-autosuggestions)
 
