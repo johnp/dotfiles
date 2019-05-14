@@ -1,29 +1,38 @@
-[Desktop Entry]
-Name=Firefox Nightly
-GenericName=Web Browser
-Comment=Browse the Web
-Exec=firejail --shell=none --name=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
-Path=/opt/nightly/
-Terminal=false
-Type=Application
-Icon=/opt/nightly/browser/icons/mozicon128.png
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
-StartupNotify=true
-Actions=NewTab;NewWindow;NewPrivateWindow;SafeMode
+#!/usr/bin/env xdg-open
+[Desktop Action NewPrivateWindow]
+Exec=firejail --join=browser -- /opt/nightly/firefox -private-window
+Name=New private window
 
 [Desktop Action NewTab]
-Name=Open new tab
 Exec=firejail --join=browser -- /opt/nightly/firefox -new-tab about:newtab
+Name=Open new tab
 
 [Desktop Action NewWindow]
-Name=Open new window
 Exec=firejail --join=browser -- /opt/nightly/firefox -new-window
-
-[Desktop Action NewPrivateWindow]
-Name=New private window
-Exec=firejail --join=browser -- /opt/nightly/firefox -private-window
+Name=Open new window
 
 [Desktop Action SafeMode]
+Exec=firejail --shell=none --name=browser-save-mode --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
 Name=Safe Mode
-Exec=firejail --shell=none --name=browser-save-mode --tracelog --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
+
+[Desktop Entry]
+Actions=NewTab;NewWindow;NewPrivateWindow;SafeMode
+Categories=Network;WebBrowser;
+Comment[en_US]=Browse the Web
+Comment=Browse the Web
+Exec=firejail --shell=none --join-or-start=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
+GenericName[en_US]=Web Browser
+GenericName=Web Browser
+Icon=/opt/nightly/browser/chrome/icons/default/default128.png
+MimeType=text/html;application/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;
+Name[en_US]=Firefox Nightly
+Name=Firefox Nightly
+Path=/opt/nightly/
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
