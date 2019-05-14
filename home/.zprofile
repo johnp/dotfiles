@@ -12,6 +12,7 @@ export LESSSECURE=1
 # rust
 export RUST_BACKTRACE=1
 export RUSTC_WRAPPER=sccache
+export RUSTFLAGS='-C target-cpu=native'
 # less+rust=bat
 export BAT_PAGER="$HOME/.local/bin/.bat-pager.sh"
 # work around coreutils bug
