@@ -1,8 +1,3 @@
-# JetBrains software shall use the IntelliJ JDK
-export IDEA_JDK=/usr/lib/jvm/intellij-jdk
-export PYCHARM_JDK=/usr/lib/jvm/intellij-jdk
-export CL_JDK=/usr/lib/jvm/intellij-jdk
-export WEBIDE_JDK=/usr/lib/jvm/intellij-jdk
 # set default PCM for ALSA
 export ALSA_CARD=PCH
 
@@ -12,12 +7,11 @@ if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
     # Java - resolve "gray blob" issues on wayland
     export _JAVA_AWT_WM_NONREPARENTING=1
     # QT - Use wayland backend without client side decorations
-    export QT_QPA_PLATFORM='wayland'
+    export QT_QPA_PLATFORM='wayland-egl'
     export QT_WAYLAND_DISABLE_WINDOWDECORATION='1'
     # set keyboard layout(s) for sway
-    export XKB_DEFAULT_LAYOUT=us,de
-    export XKB_DEFAULT_VARIANT=altgr-intl,
-    export XKB_DEFAULT_OPTIONS=grp:win_space_toggle
-    sway -d &> "/tmp/sway `date '+%F %H:%M:%S'`.log"
+    export XKB_DEFAULT_LAYOUT=us
+    export XKB_DEFAULT_VARIANT=altgr-intl
+    sway &> "/tmp/sway `date '+%F %H:%M:%S'`.log"
     #exec gdb -batch -ex "run -d &> ~/sway.log" -ex "continue" -ex "generate-core-file" /usr/bin/sway
 fi
