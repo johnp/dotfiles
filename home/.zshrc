@@ -70,7 +70,7 @@ DISABLE_UPDATE_PROMPT="true"
 
 ## Plugins
 plugins=(git gitfast git-extras colored-man-pages common-aliases extract history \
- systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang ripgrep \
+ systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang fd ripgrep \
  alias-tips history-search-multi-word fast-syntax-highlighting)
 # zsh-autosuggestions)
 
