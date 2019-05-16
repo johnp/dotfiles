@@ -12,10 +12,13 @@ order += "ethernet ppp0"
 order += "wifi"
 order += "ethernet enp5s0f1"
 order += "ethernet enp0s31f6"
+order += "ethernet enp0s20u1"
+#order += "net_iplist"
 #order += "whatismyip"
 #order += "external_script ipv4"
 #order += "external_script ipv6"
-#order += "volume_status"
+order += "volume_status"
+order += "backlight"
 order += "battery_level"
 order += "cpu_temperature 0"
 order += "load"
@@ -44,7 +47,7 @@ wifi {
     format_up = "W: ({signal_percent} at {ssid}, {bitrate}) {ip}"
     format_down = ""
     signal_bad = 20
-    device = 'wlp4s0'
+    #device = 'wlp4s0'
 }
 
 ethernet enp5s0f1 {
@@ -53,6 +56,11 @@ ethernet enp5s0f1 {
 }
 
 ethernet enp0s31f6 {
+    format_up = "E: %ip"
+    format_down = ""
+}
+
+ethernet enp0s20u1 {
     format_up = "E: %ip"
     format_down = ""
 }
@@ -71,12 +79,26 @@ external_script ipv6 {
     cache_timeout = 120
 }
 
+net_iplist {
+    iface_blacklist = ['lo']
+    ip_blacklist = ['127.*', '::1']
+}
+
 volume_status {
-#    format = " {percentage}%"
-#    format_muted = " {percentage}%"
+    format = " {percentage}%"
+    format_muted = ""
     button_up = 4
     button_down = 5
     button_mute = 2
+}
+
+backlight {
+    format = " {level}%"
+    brightness_delta = 5
+    brightness_minimal = 0.54
+    button_down = 0
+    button_up = 0
+    command = "light"
 }
 
 battery_level {
@@ -87,10 +109,6 @@ battery_level {
     threshold_bad = 5
 }
 
-tztime local {
-    format = "%Y-%m-%d %H:%M:%S"
-}
-
 cpu_temperature 0 {
     format = "CPU: %degrees°C"
     max_threshold = 60
@@ -99,4 +117,8 @@ cpu_temperature 0 {
 
 load {
     format = "%1min %5min"
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M:%S"
 }
