@@ -305,8 +305,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Brightness Control
 # Note: `light` is from the AUR
-bindsym XF86MonBrightnessDown exec light -U 5
-bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5 && $updatepy3
+bindsym XF86MonBrightnessUp exec light -A 5 && $updatepy3
 
 # Sleep key
 bindsym XF86Sleep exec $slock && systemctl suspend
