@@ -1,0 +1,30 @@
+#!/bin/sh
+
+BASE_TEMP_DIR="${BASE_TEMP_DIR:- /tmp}"
+TEMP_DIR=$(mktemp -d "${BASE_TEMP_DIR}/chromium.XXXXXXX")
+CHROMIUM_ARGS="${CHROMIUM_ARGS:---no-first-run}"
+
+if command -v firejail > /dev/null 2>&1; then
+  FIREJAIL_CMD=$(command -v firejail)
+fi
+
+FEDORA_CHROMIUM="/usr/lib64/chromium-browser/chromium-browser"
+if [ -x "$FEDORA_CHROMIUM" ]; then
+  CHROMIUM_CMD="$FEDORA_CHROMIUM"
+elif command -v chromium > /dev/null 2>&1; then
+  CHROMIUM_CMD="chromium"
+elif command -v chromium-browser > /dev/null 2>&1; then
+  CHROMIUM_CMD="chromium-browser"
+elif command -v google-chrome > /dev/null 2>&1; then
+  CHROMIUM_CMD="google-chrome"
+else
+  echo "Failed to find chrome/chromium executable." 1>&2
+  exit 2
+fi
+
+echo "Running{$FIREJAIL_CMD:+ (firejailed)} ${CHROMIUM_CMD} with a temporary profile"
+# shellcheck disable=SC2093 disable=SC2086
+exec $FIREJAIL_CMD ${FIREJAIL_CMD:+--overlay-tmpfs} $CHROMIUM_CMD $CHROMIUM_ARGS --user-data-dir="$TEMP_DIR"
+
+rm -rf --one-file-system "$TEMP_DIR"
+exit 0

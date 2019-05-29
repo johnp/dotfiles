@@ -1,0 +1,28 @@
+#!/bin/sh
+
+BASE_TEMP_DIR="${BASE_TEMP_DIR:- /tmp}"
+TEMP_DIR=$(mktemp -d "${BASE_TEMP_DIR}/firefox.XXXXXXX")
+FF_ARGS="${FF_ARGS:--no-remote -CreateProfile TEMP $TEMP_DIR}"
+
+if command -v firejail > /dev/null 2>&1; then
+  FIREJAIL_CMD=$(command -v firejail)
+fi
+
+FF_NIGHTLY="/opt/nightly/firefox-bin"
+if [ -x "$FF_NIGHTLY" ]; then
+  CMD="$FF_NIGHTLY"
+elif command -v firefox-bin > /dev/null 2>&1; then
+  CMD="firefox-bin"
+elif command -v firefox > /dev/null 2>&1; then
+  CMD="firefox"
+else
+  echo "Failed to find firefox executable." 1>&2
+  exit 2
+fi
+
+echo "Running{$FIREJAIL_CMD:+  (firejailed)} ${CMD} witha temporary profile"
+# shellcheck disable=SC2093 disable=SC2086
+exec $FIREJAIL_CMD ${FIREJAIL_CMD:+--overlay-tmpfs} $CMD $FF_ARGS
+
+rm -rf --one-file-system "$TEMP_DIR"
+exit 0
