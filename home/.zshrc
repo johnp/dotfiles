@@ -102,6 +102,8 @@ unsetopt nomatch
 
 # history
 setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_SPACE
+export HISTCONTROL=ignorespace
 
 # source custom aliases
 source "$HOME/.aliases"

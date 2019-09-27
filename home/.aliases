@@ -1,5 +1,6 @@
 # systemd
 alias sc='systemctl -l --no-pager'
+alias sc-suspend='systemctl suspend'
 # git
 alias gsu='git submodule update --remote --merge'
 # arch
@@ -24,10 +25,13 @@ alias repos='cd ~/Repos'
 alias work='cd ~/Sync/Work'
 alias projects='cd ~/Sync/Projects'
 alias uni='cd ~/Sync/Uni\ Bamberg'
-# clear LESS config variable for man
+# clear LESS environment variable for man
 alias man='LESS= man'
 # system logs
 alias journal='journalctl -xeb'
+alias journalf='journalctl -f -xeb'
+alias journalu='journalctl -xe -u'
+alias journalfu='journalctl -f -xe -u'
 alias dmesg='sudo dmesg -H'
 # fast restart
 alias kexec-restart='sudo systemctl start kexec.target --job-mode=replace-irreversible'
@@ -43,6 +47,8 @@ alias du='du -sh'
 alias dufs='du -sh * | sort -h'
 # common-aliases only does 'rm -i', but '--one-file-system' should IMHO also be default
 alias rm='rm -i --one-file-system'
+# common-aliases only does 'cp -i', but I'd like to make better use of COW
+alias cp='cp -i --reflink=auto --sparse=always'
 # piping
 alias -g G='| rg -i'
 alias -g Gstr='| rg -iF'
@@ -51,7 +57,7 @@ alias -g Sh='| sort -h'
 alias -g B='| bat'
 # various stuff
 alias copy='xclip -selection c'
-alias httpserver='python3 -m http.server 8000 --bind 127.0.0.1'
+alias httpserver='python3 -m http.server --bind 127.0.0.1'
 alias fjs='firejail --nosound --net=none --private --private-tmp --private-dev'
 alias fjss='firejail --net=none --private --private-tmp --private-dev'
 # media
