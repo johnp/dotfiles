@@ -139,8 +139,3 @@ bindkey '^[Oc' forward-word
 if command -v pazi &>/dev/null; then
   eval "$(pazi init zsh)"
 fi
-
-# virtualenvwrapper
-if [ -f "/usr/bin/virtualenvwrapper_lazy.sh" ]; then
-  source /usr/bin/virtualenvwrapper_lazy.sh
-fi
