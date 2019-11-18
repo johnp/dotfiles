@@ -20,6 +20,8 @@ export BAT_PAGER="$HOME/.local/bin/.bat-pager.sh"
 # work around coreutils bug
 # https://unix.stackexchange.com/questions/258679
 export QUOTING_STYLE=literal
+# django-admin colors
+export DJANGO_COLORS="dark"
 
 # source machine specific profile
 if [ -f "$HOME/.local/$HOST/profile" ] ; then

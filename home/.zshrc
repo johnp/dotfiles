@@ -123,12 +123,15 @@ scp() {
 }
 
 # some default compiler & linker options
-#export CPPFLAGS="-D_FORTIFY_SOURCE=2"
-COMMON_FLAGS="-march=native -Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -Wstrict-overflow=2 -Wfloat-equal -Wdouble-promotion -Wcast-qual -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wpadded -Wunsafe-loop-optimizations -Wno-aggressive-loop-optimizations -Wwrite-strings -Wredundant-decls -Og -fno-plt -fstack-check -pipe -fstack-protector-strong"
-export CFLAGS="-Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -Wbad-function-cast $COMMON_FLAGS"
-export MYCFLAGS="-std=c17 $CFLAGS"
-export MYCXXFLAGS="-std=c++17 -Wmissing-declarations -Weffc++ $COMMON_FLAGS"
-export MYLDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
+# TODO: clang specific (e.g. flto=thin), PIE/PIC
+_COMMON_FLAGS="-march=native -mtune=native -g -D_FORTIFY_SOURCE=2 -Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -Wstrict-overflow=2 -Wfloat-equal -Wdouble-promotion -Wcast-qual -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wpadded -Wunsafe-loop-optimizations -Wno-aggressive-loop-optimizations -Wwrite-strings -Wredundant-decls -fno-plt -fstack-check -fstack-clash-protection -pipe -fstack-protector-strong -fasynchronous-unwind-tables"
+_CFLAGS="-std=c17 -Werror=implicit-function-declaration -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition -Wbad-function-cast $_COMMON_FLAGS"
+export OPT_CFLAGS="-O2 -flto $_CFLAGS"
+export DBG_CFLAGS="-Og -fsanitize=undefined $_CFLAGS"
+_CXXFLAGS="-std=c++17 -D_GLIBCXX_ASSERTIONS -Wmissing-declarations -Weffc++ $_COMMON_FLAGS"
+export OPT_CXXFLAGS="-O2 -flto $_CXXFLAGS"
+export DBG_CXXFLAGS="-Og -fsanitize=undefined $_CXXFLAGS"
+export OPT_LDFLAGS="-Wl,-O2,--sort-common,--as-needed,-z,defs,-z,relro,-z,now"
 
 # TODO: this is probably keyboard/device-specific!
 # --> compare with .inputrc / put it someplace sane
