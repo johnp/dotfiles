@@ -60,6 +60,8 @@ alias copy='xclip -selection c'
 alias httpserver='python3 -m http.server --bind 127.0.0.1'
 alias fjs='firejail --nosound --net=none --private --private-tmp --private-dev'
 alias fjss='firejail --net=none --private --private-tmp --private-dev'
+alias wttr='curl wttr.in?format=v2'
+alias wttr1='curl wttr.in'
 # media
 alias ytdlF='youtube-dl -F'
 alias ytdllf='youtube-dl -F'
