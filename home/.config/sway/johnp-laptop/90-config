@@ -1,8 +1,54 @@
 # Laptop configuration
 
+# Base settings
+set $term alacritty
+set $menu j4-dmenu-desktop
+
 # Idle / Suspend / Lock
 set $minlight 'light -S 0.54'
 set $cleargpg 'gpg-connect-agent reloadagent /bye'
+
+# Outputs
+output * bg ~/Images/solarized-wallpaper-arch.png fill
+output eDP-1 resolution 1920x1080 pos 0 0
+output HDMI-A-1 position 1920 0
+
+# TODO: Output enable/disable dynamically on connect/disconnect (via swaymsg?)
+#output HDMI-A-1 disable
+#output HDMI-A-1 enable
+
+# Inputs
+input 2:7:SynPS/2_Synaptics_TouchPad {
+        tap enabled
+        click_method button_areas
+        natural_scroll disabled
+        middle_emulation enabled
+        scroll_method edge
+}
+
+# force status bar update
+set $update killall -SIGUSR1 i3status
+set $updatepy3 killall -USR1 py3status
+
+#
+# Multimedia Keys
+# alsa
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ && $updatepy3
+bindsym XF86AudioLowerVolume exec amixer set Master 10%- && $updatepy3
+bindsym XF86AudioMute exec amixer set Master toggle && $updatepy3
+# pulseaudio
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $updatepy3
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $updatepy3
+#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $updatepy3
+
+# Brightness Control
+# Note: `light` is from the AUR
+bindsym XF86MonBrightnessDown exec light -U 5 && $updatepy3
+bindsym XF86MonBrightnessUp exec light -A 5 && $updatepy3
+
+# Sleep key
+bindsym XF86Sleep exec $slock && systemctl suspend
+
 # TODO: (save) minlight before lock (unless suspend) & restore light on unlock
 exec swayidle \
     timeout 540 "$minlight" \

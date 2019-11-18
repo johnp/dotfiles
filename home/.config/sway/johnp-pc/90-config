@@ -1,1 +1,29 @@
-# PC configuration
+# johnp-pc configuration
+
+set $term alacritty
+set $menu rofi -modi 'drun,ssh' -show drun -terminal $term
+
+### Outputs
+
+#output * background "~/.local/share/wallpapers"
+
+output DVI-D-0 {
+  resolution 1920x1200
+  position 0 0
+}
+
+output HDMI-A-0 {
+  resolution 1920x1200
+  position 1920 0
+}
+
+### Multimedia
+
+# force status bar update
+set $update killall -SIGUSR1 i3status
+set $updatepy3 killall -USR1 py3status
+
+# pulseaudio
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $updatepy3
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $updatepy3
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $updatepy3

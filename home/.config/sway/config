@@ -2,35 +2,37 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+### Global base variables
+# Logo key
+set $mod Mod4
+set $slock swaylock -c 1C1C1C
+
+# Include device-specific configuration
+include ~/.config/sway/`hostname`/*
 
 ### Variables
 #
-# Logo key
-set $mod Mod4
 # Terminal emulator
 #set $term urxvtc
-set $term alacritty
+#set $term alacritty
 # Application launcher
-set $menu j4-dmenu-desktop
+#set $menu j4-dmenu-desktop
 #set $menu dmenu
 #set $menu rofi -modi 'drun,ssh' -show drun -terminal urxvt
 #set $menu j4-dmenu-desktop -d 'rofi -dmenu -i -p \"run:\"'
 # Preferred font
 #font  
-# Screenlocker
-set $slock swaylock -c 1C1C1C
 
 ### Output configuration
 #
 # Default wallpaper
 #output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Images/solarized-wallpaper-arch.png fill
 #
 # Example output configuration:
 #
-output eDP-1 resolution 1920x1080 position 0,0
-output HDMI-A-1 position 1920,0
-# TODO: dynamically enable/disable output on connect/disconnect, e.g. bindsym this ?
+#output eDP-1 resolution 1920x1080 position 0,0
+#output HDMI-A-1 position 1920,0
+# to dynamically enable/disable output on connect/disconnect bindsym this:
 #output HDMI-A-1 disable
 #output HDMI-A-1 enable
 #
@@ -220,14 +222,7 @@ bar {
 #
 # Input devices:
 #
-# TODO: move to device config
-input 2:7:SynPS/2_Synaptics_TouchPad {
-        tap enabled
-        click_method button_areas
-        natural_scroll disabled
-        middle_emulation enabled
-        scroll_method edge
-}
+# IN DEVICE CONFIG
 
 # Resize window
 # issue #3146
@@ -290,9 +285,9 @@ set $updatepy3 killall -USR1 py3status
 #
 # Multimedia Keys
 # alsa
-bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ && $updatepy3
-bindsym XF86AudioLowerVolume exec amixer set Master 10%- && $updatepy3
-bindsym XF86AudioMute exec amixer set Master toggle && $updatepy3
+#bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ && $updatepy3
+#bindsym XF86AudioLowerVolume exec amixer set Master 10%- && $updatepy3
+#bindsym XF86AudioMute exec amixer set Master toggle && $updatepy3
 # pulseaudio
 #bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $updatepy3
 #bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $updatepy3
@@ -318,7 +313,7 @@ bindsym XF86Sleep exec $slock && systemctl suspend
 for_window [class="Firefox"] border csd
 for_window [class="Nightly"] border csd
 #for_window [window_role="browser"] border none
-for_window [class="Thunderbird"] border csd
+#for_window [class="Thunderbird"] border csd
 #for_window [class="^Chrom(e|ium)$"] border csd
 for_window [class="Remmina"] border none
 
@@ -362,9 +357,6 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
         bindsym q      mode "default"
 }
-
-# Include device-specific configuration
-include ~/.config/sway/`hostname`/*
 
 # make sure we end up one the first workspace
 #workspace 1
