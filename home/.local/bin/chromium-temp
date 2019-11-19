@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BASE_TEMP_DIR="${BASE_TEMP_DIR:- /tmp}"
+BASE_TEMP_DIR="${BASE_TEMP_DIR:-/tmp}"
 TEMP_DIR=$(mktemp -d "${BASE_TEMP_DIR}/chromium.XXXXXXX")
 CHROMIUM_ARGS="${CHROMIUM_ARGS:---no-first-run}"
 
@@ -22,9 +22,10 @@ else
   exit 2
 fi
 
-echo "Running{$FIREJAIL_CMD:+ (firejailed)} ${CHROMIUM_CMD} with a temporary profile"
+echo "Running ${CHROMIUM_CMD} with a temporary profile"
 # shellcheck disable=SC2093 disable=SC2086
-exec $FIREJAIL_CMD ${FIREJAIL_CMD:+--overlay-tmpfs} $CHROMIUM_CMD $CHROMIUM_ARGS --user-data-dir="$TEMP_DIR"
+#$FIREJAIL_CMD ${FIREJAIL_CMD:+--overlay-tmpfs} $CHROMIUM_CMD $CHROMIUM_ARGS --user-data-dir="$TEMP_DIR"
+$CHROMIUM_CMD $CHROMIUM_ARGS --user-data-dir="$TEMP_DIR"
 
 rm -rf --one-file-system "$TEMP_DIR"
 exit 0

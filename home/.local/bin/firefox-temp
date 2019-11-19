@@ -1,14 +1,15 @@
 #!/bin/sh
 
-BASE_TEMP_DIR="${BASE_TEMP_DIR:- /tmp}"
-TEMP_DIR=$(mktemp -d "${BASE_TEMP_DIR}/firefox.XXXXXXX")
-FF_ARGS="${FF_ARGS:--no-remote -CreateProfile TEMP $TEMP_DIR}"
+BASE_TEMP_DIR="${BASE_TEMP_DIR:-/tmp}"
+TEMP_DIR=$(mktemp -d)
+#FF_ARGS="${FF_ARGS:- -no-remote -CreateProfile \"TEMP $TEMP_DIR\"}"
+FF_ARGS="${FF_ARGS:- -no-remote -P temp-only}"
 
 if command -v firejail > /dev/null 2>&1; then
   FIREJAIL_CMD=$(command -v firejail)
 fi
 
-FF_NIGHTLY="/opt/nightly/firefox-bin"
+FF_NIGHTLY="/opt/nightly/firefox"
 if [ -x "$FF_NIGHTLY" ]; then
   CMD="$FF_NIGHTLY"
 elif command -v firefox-bin > /dev/null 2>&1; then
@@ -20,9 +21,18 @@ else
   exit 2
 fi
 
-echo "Running{$FIREJAIL_CMD:+  (firejailed)} ${CMD} witha temporary profile"
-# shellcheck disable=SC2093 disable=SC2086
-exec $FIREJAIL_CMD ${FIREJAIL_CMD:+--overlay-tmpfs} $CMD $FF_ARGS
+if [ -x "$FIREJAIL_CMD" ]; then
+  echo "Running $FIREJAIL_CMD $CMD with a temporary profile"
+  # shellcheck disable=SC2093 disable=SC2086
+  FIREJAIL_ARGS=${FIREJAIL_CMD:+ --name="firefox-temp" --private-home=".mozilla" --private-cache}
+  echo $FIREJAIL_CMD $FIREJAIL_ARGS $CMD $FF_ARGS
+  $FIREJAIL_CMD $FIREJAIL_ARGS $CMD $FF_ARGS
+else
+  echo "Running $CMD with a temporary profile"
+  # shellcheck disable=SC2086
+  # TODO: fix profile dir
+  $CMD $FF_ARGS
+fi
 
 rm -rf --one-file-system "$TEMP_DIR"
 exit 0

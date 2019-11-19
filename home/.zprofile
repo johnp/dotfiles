@@ -22,6 +22,8 @@ export BAT_PAGER="$HOME/.local/bin/.bat-pager.sh"
 export QUOTING_STYLE=literal
 # django-admin colors
 export DJANGO_COLORS="dark"
+# default editor
+export EDITOR=nano
 
 # source machine specific profile
 if [ -f "$HOME/.local/$HOST/profile" ] ; then
