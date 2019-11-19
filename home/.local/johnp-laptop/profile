@@ -1,5 +1,3 @@
-
-
 # set default PCM for ALSA
 export ALSA_CARD=PCH
 
