@@ -25,14 +25,21 @@ set $menu j4-dmenu-desktop
 set $workspace1 "1:Terminal"
 set $workspace2 "2:Firefox"
 set $workspace3 "3:Firefox"
-set $workspace4 "4:Chrome"
+set $workspace4 "4:Misc"
 set $workspace5 "5:Code"
-set $workspace6 "6:VM/RDP"
+set $workspace6 "6:Code"
 set $workspace7 "7:Thunderbird"
-set $workspace8 "8:"
-set $workspace9 "9:B"
-set $workspace10 "10"
+set $workspace8 "8:Misc"
+set $workspace9 "9:Misc"
+set $workspace10 "10:Term"
 
+# default workspaces 5-9 to external monitor
+workspace $workspace5 output HDMI2 HDMI1 eDP1
+workspace $workspace6 output HDMI2 HDMI1 eDP1
+workspace $workspace7 output HDMI2 HDMI1 eDP1
+workspace $workspace8 output HDMI2 HDMI1 eDP1
+workspace $workspace9 output HDMI2 HDMI1 eDP1
+#workspace $workspace10 output HDMI2 HDMI1 eDP1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -95,6 +102,25 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# assign workspaces
+#assign [class="^URxvt"] $workspace1
+#assign [class="^Firefox"] $workspace2
+#assign [class="^nautilus"] $workspace3
+#assign [class="^Vlc"] $workspace4
+#assign [class="^mpv"] $workspace4
+assign [class="PyCharm"] $workspace5
+assign [class="PhpStorm"] $workspace5
+assign [class="IntelliJ"] $workspace5
+assign [class="IDEA"] $workspace5
+assign [class="WebStorm"] $workspace6
+assign [class="^Remmina$"] $workspace6
+assign [title="^RDP"] $workspace6
+assign [class="^Thunderbird$"] $workspace7
+#assign [class="^Sublime"] $workspace8
+assign [title="^JDownloader"] $workspace10
+
+#for_window [title="^RDP"] fullscreen
+
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -119,47 +145,9 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
-# assign workspaces
-#assign [class="^URxvt"] $workspace1
-#assign [class="^Firefox"] $workspace2
-#assign [class="^nautilus"] $workspace3
-#assign [class="^Vlc"] $workspace4
-#assign [class="^mpv"] $workspace4
-assign [class="^PyCharm"] $workspace5
-assign [class="^PhpStorm"] $workspace5
-assign [class="^IntelliJ"] $workspace5
-assign [class="^JetBrains"] $workspace5
-assign [class="^Remmina$"] $workspace6
-assign [title="^RDP"] $workspace6
-assign [class="^Thunderbird$"] $workspace7
-#assign [class="^Sublime"] $workspace8
-assign [title="^JDownloader"] $workspace10
-
-#for_window [title="^RDP"] fullscreen
-
-# switch to workspace
-#bindsym $mod+1 workspace 1
-#bindsym $mod+2 workspace 2
-#bindsym $mod+3 workspace 3
-#bindsym $mod+4 workspace 4
-#bindsym $mod+5 workspace 5
-#bindsym $mod+6 workspace 6
-#bindsym $mod+7 workspace 7
-#bindsym $mod+8 workspace 8
-#bindsym $mod+9 workspace 9
-#bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-#bindsym $mod+Shift+1 move container to workspace 1
-#bindsym $mod+Shift+2 move container to workspace 2
-#bindsym $mod+Shift+3 move container to workspace 3
-#bindsym $mod+Shift+4 move container to workspace 4
-#bindsym $mod+Shift+5 move container to workspace 5
-#bindsym $mod+Shift+6 move container to workspace 6
-#bindsym $mod+Shift+7 move container to workspace 7
-#bindsym $mod+Shift+8 move container to workspace 8
-#bindsym $mod+Shift+9 move container to workspace 9
-#bindsym $mod+Shift+0 move container to workspace 10
+# move workspace to left/right monitor
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+Shift+less move workspace to output left
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -260,7 +248,7 @@ for_window [class=".*"] border pixel 0
 #for_window [class="^Chrom(e|ium)$"] border pixel 0
 for_window [class="Remmina"] border none
 
-for_window [class=".*"] title_format ""
+#for_window [class=".*"] title_format ""
 
 # gaps
 #gaps edge_gaps off
@@ -269,3 +257,7 @@ for_window [class=".*"] title_format ""
 
 # autostart dunst notification daemon
 #exec --no-startup-id dunst
+
+# setup laptop multi-monitor
+exec xrandr | grep 'HDMI1 connected' && xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1 || xrandr --output VIRTUAL1 --off --output HDMI1 --of
+exec xrandr | grep 'HDMI2 connected' && xrandr --output eDP1 --auto --output HDMI2 --auto --right-of eDP1 || xrandr --output VIRTUAL1 --off --output HDMI2 --off
