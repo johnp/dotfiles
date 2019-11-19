@@ -259,5 +259,5 @@ for_window [class="Remmina"] border none
 #exec --no-startup-id dunst
 
 # setup laptop multi-monitor
-exec xrandr | grep 'HDMI1 connected' && xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1 || xrandr --output VIRTUAL1 --off --output HDMI1 --of
+exec xrandr | grep 'HDMI1 connected' && xrandr --output eDP1 --auto --output HDMI1 --auto --right-of eDP1 || xrandr --output VIRTUAL1 --off --output HDMI1 --off
 exec xrandr | grep 'HDMI2 connected' && xrandr --output eDP1 --auto --output HDMI2 --auto --right-of eDP1 || xrandr --output VIRTUAL1 --off --output HDMI2 --off
