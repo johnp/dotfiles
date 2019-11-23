@@ -4,16 +4,12 @@ export ALSA_CARD=PCH
 # autostart sway when logging into tty1
 if [ -z "$DISPLAY" ] && [ $(tty) = /dev/tty1 ] ; then
     export VISUAL=kate
-    #urxvtd -q -f -o
     # Java - resolve "gray blob" issues on wayland
     export _JAVA_AWT_WM_NONREPARENTING=1
     export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
     # QT - Use wayland backend without client side decorations
     export QT_QPA_PLATFORM='wayland-egl'
     export QT_WAYLAND_DISABLE_WINDOWDECORATION='1'
-    # set keyboard layout(s) for sway
-    export XKB_DEFAULT_LAYOUT=us
-    export XKB_DEFAULT_VARIANT=altgr-intl
     # import $DISPLAY for dunst notification daemon (issue #347)
     systemctl --user import-environment DISPLAY
     sway &> "/tmp/sway `date '+%F %H:%M:%S'`.log"

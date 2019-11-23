@@ -1,6 +1,7 @@
 # johnp-pc configuration
 
-set $term alacritty
+### Host specific variable overrides
+set $term lxterminal
 set $menu rofi -modi 'drun,ssh' -show drun -terminal $term
 
 ### Outputs
