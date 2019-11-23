@@ -6,6 +6,22 @@
 # Logo key
 set $mod Mod4
 set $slock swaylock -c 1C1C1C
+set $term alacritty
+set $menu dmenu
+
+# Default input settings
+input type:keyboard {
+    xkb_layout us
+    xkb_variant altgr-intl
+    #xkb_options compose:ralt,lv3:switch (are those needed if the layout already has level3(ralt_switch) ?
+    #lv3:ralt_switch_multikey?
+    #lv5:rwin_switch_lock # probably not?
+    xkb_options keypad:future,caps:escape_shifted_capslock,lv3:ralt_switch_multikey,compose:caps-altr,shift:both_shiftlock,keypad:pointerkeys,eurosign:e,nbsp:zwnj2nb3nnb4
+	#compose:caps-altr # TODO: figure out what to do with compose / lv3
+    #kpdl:kposs # "correct" keys, but :future *always* gives us: DS=, and TS=.
+    xkb_numlock enabled
+}
+
 
 # Include device-specific configuration
 include ~/.config/sway/`hostname`/*
