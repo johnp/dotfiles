@@ -12,9 +12,13 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
+# zsh built-in bracketed-paste
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
 # path to my oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
-# load rustup/pipenv completions
+# load custom completions
 fpath+="$HOME/.zfunc"
 
 ## Dotfiles (andsens/homeshick)
