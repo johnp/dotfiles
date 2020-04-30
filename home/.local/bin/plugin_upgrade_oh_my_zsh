@@ -1,18 +1,20 @@
 #!/bin/sh
 
+: ${ZSH_CUSTOM:=$HOME/.oh-my-zsh/custom}
+
 # alias-tips
-git -C $ZSH_CUSTOM/plugins/alias-tips pull || git clone --depth 1 https://github.com/djui/alias-tips.git $ZSH_CUSTOM/plugins/alias-tips
+git -C "$ZSH_CUSTOM/plugins/alias-tips" pull || git clone --depth 1 https://github.com/djui/alias-tips.git "$ZSH_CUSTOM/plugins/alias-tips"
 
 # history-search-multiword
-git -C $ZSH_CUSTOM/plugins/history-search-multi-word pull || git clone --depth 1 https://github.com/zdharma/history-search-multi-word.git $ZSH_CUSTOM/plugins/history-search-multi-word
+git -C "$ZSH_CUSTOM/plugins/history-search-multi-word" pull || git clone --depth 1 https://github.com/zdharma/history-search-multi-word.git "$ZSH_CUSTOM/plugins/history-search-multi-word"
 
 # fast-syntax-highlighting
-git -C $ZSH_CUSTOM/plugins/fast-syntax-highlighting pull || git clone --depth 1 https://github.com/zdharma/fast-syntax-highlighting.git $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+git -C "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" pull || git clone --depth 1 https://github.com/zdharma/fast-syntax-highlighting.git "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
 
 # zsh-autosuggestions
-git -C $ZSH_CUSTOM/plugins/zsh-autosuggestions pull || git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git -C "$ZSH_CUSTOM/plugins/zsh-autosuggestions" pull || git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 
 # powerlevel10k
-git -C $ZSH_CUSTOM/themes/powerlevel10k pull || git clone --depth 1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git -C "$ZSH_CUSTOM/themes/powerlevel10k" pull || git clone --depth 1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 
 
