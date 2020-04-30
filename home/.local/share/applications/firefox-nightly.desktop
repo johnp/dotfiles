@@ -1,38 +1,34 @@
 #!/usr/bin/env xdg-open
 [Desktop Action NewPrivateWindow]
-Exec=firejail --join=browser -- /opt/nightly/firefox -private-window
-Name=New private window
-
-[Desktop Action NewTab]
-Exec=firejail --join=browser -- /opt/nightly/firefox -new-tab about:newtab
-Name=Open new tab
+Exec=firejail --join=browser -- /opt/nightly/firefox -private-window %u
+Name=Open new private window
 
 [Desktop Action NewWindow]
-Exec=firejail --join=browser -- /opt/nightly/firefox -new-window
+Exec=firejail --join=browser -- /opt/nightly/firefox -new-window %u
 Name=Open new window
 
 [Desktop Action SafeMode]
-Exec=firejail --shell=none --name=browser-save-mode --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
+Exec=firejail --shell=none --name=browser-safe-mode --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/.tmp -- /opt/nightly/firefox -safe-mode %u
 Name=Safe Mode
 
 [Desktop Entry]
-Actions=NewTab;NewWindow;NewPrivateWindow;SafeMode
+Actions=NewWindow;NewPrivateWindow;SafeMode
 Categories=Network;WebBrowser;
 Comment[en_US]=Browse the Web
 Comment=Browse the Web
-Exec=firejail --shell=none --join-or-start=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
+Exec=firejail --shell=none --env=mesa_glthread=true --env=radeonsi_assume_no_z_fights=true --env=radeonsi_commutative_blend_add=true --join-or-start=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
 GenericName[en_US]=Web Browser
 GenericName=Web Browser
 Icon=/opt/nightly/browser/chrome/icons/default/default128.png
-MimeType=text/html;application/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;
+MimeType=text/html;application/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;
 Name[en_US]=Firefox Nightly
 Name=Firefox Nightly
 Path=/opt/nightly/
 StartupNotify=true
 Terminal=false
-TerminalOptions=
+#TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
+#X-DBUS-ServiceName=
+#X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=
+#X-KDE-Username=

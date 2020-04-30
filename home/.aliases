@@ -31,6 +31,7 @@ alias uni='cd ~/Sync/Uni\ Bamberg'
 alias man='LESS= man'
 # system logs
 alias journal='journalctl -xeb'
+alias journale='journalctl -xeb -p 3'
 alias journalf='journalctl -f -xeb'
 alias journalu='journalctl -xe -u'
 alias journalfu='journalctl -f -xe -u'
@@ -71,6 +72,7 @@ alias ytdlgf='youtube-dl --get-format'
 alias mpvs='mpv --profile=stream'
 alias mpvs720p='mpv --profile=stream --ytdl-format=720p'
 alias mpvjp='mpv --profile=jp'
+alias mpvjp180='mpvjp --profile=jp --vf=sub,rotate --video-rotate=180'
 # minimum light setting on laptop
 alias minlight='light -S 0.54'
 

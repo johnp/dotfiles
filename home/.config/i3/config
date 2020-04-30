@@ -7,10 +7,12 @@
 # Logo key
 set $mod Mod4
 # Terminal emulator
-#set $term urxvt
-set $term alacritty
+set $term urxvt
+#set $term lxterminal
+#set $term alacritty
 # Application Launcher
-set $menu j4-dmenu-desktop
+set $menu dmenu
+#set $menu j4-dmenu-desktop
 
 # 1: Terminal
 # 2: Browser
