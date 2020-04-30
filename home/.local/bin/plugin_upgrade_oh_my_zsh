@@ -1,9 +1,18 @@
 #!/bin/sh
 
-git -C ~/.oh-my-zsh/custom/plugins/alias-tips pull
-git -C ~/.oh-my-zsh/custom/plugins/notify pull
-#git -C ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting pull
-git -C ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting pull
-git -C ~/.oh-my-zsh/custom/plugins/history-search-multi-word pull
-git -C ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions pull
-git -C ~/.oh-my-zsh/custom/themes/powerlevel9k pull
+# alias-tips
+git -C $ZSH_CUSTOM/plugins/alias-tips pull || git clone --depth 1 https://github.com/djui/alias-tips.git $ZSH_CUSTOM/plugins/alias-tips
+
+# history-search-multiword
+git -C $ZSH_CUSTOM/plugins/history-search-multi-word pull || git clone --depth 1 https://github.com/zdharma/history-search-multi-word.git $ZSH_CUSTOM/plugins/history-search-multi-word
+
+# fast-syntax-highlighting
+git -C $ZSH_CUSTOM/plugins/fast-syntax-highlighting pull || git clone --depth 1 https://github.com/zdharma/fast-syntax-highlighting.git $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+
+# zsh-autosuggestions
+git -C $ZSH_CUSTOM/plugins/zsh-autosuggestions pull || git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# powerlevel10k
+git -C $ZSH_CUSTOM/themes/powerlevel10k pull || git clone --depth 1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+
+

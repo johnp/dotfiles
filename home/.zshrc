@@ -16,6 +16,9 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+# zpty for zsh-autosuggestions
+zmodload zsh/zpty
+
 # path to my oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 # load custom completions
@@ -36,20 +39,23 @@ if [[ "$(tty)" == "/dev/tty"* ]]; then
 else
   # hide user@host if $DEFAULT_USER@localhost
   export DEFAULT_USER='johnp'
-  if [[ -d "$ZSH/custom/themes/powerlevel9k" ]]; then
-	# loading the theme costs 30-40ms startup time
-    ZSH_THEME="powerlevel9k/powerlevel9k"
-    # Powerlevel9k configuration
-    # bhilburn/powerlevel9k
-    # ryanoasis/nerd-fonts
+  if [[ -d "$ZSH/custom/themes/powerlevel10k" ]]; then
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+    # Powerlevel10k configuration
     if [[ -v DISPLAY ]]; then
+        # ryanoasis/nerd-fonts
         POWERLEVEL9K_MODE='nerdfont-complete'
     fi # else use the default mode (e.g. for tmux on tty)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context dir dir_writable vcs root_indicator)
     POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time virtualenv custom_icon)
     POWERLEVEL9K_TIME_BACKGROUND='255'
     POWERLEVEL9K_CUSTOM_ICON_BACKGROUND='255'
-    POWERLEVEL9K_CUSTOM_ICON="echo $'\uf303'"
+    #DISTRO=$(awk -F'=' '/^ID=/ {print tolower($2)}' /etc/*-release 2>/dev/null)
+    if [[ "$HOSTNAME" == "johnp-pc" ]]; then
+        POWERLEVEL9K_CUSTOM_ICON="echo $'\uf30a'"
+    elif [[ "$HOSTNAME" == "johnp-laptop" ]]; then
+        POWERLEVEL9K_CUSTOM_ICON="echo $'\uf303'"
+    fi
     #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
     #POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
     POWERLEVEL9K_SHORTEN_DELIMITER="…"
@@ -73,16 +79,41 @@ DISABLE_UPDATE_PROMPT="true"
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 ## Plugins
-plugins=(git gitfast git-extras colored-man-pages common-aliases extract history \
+plugins=(git gitfast git-extras colored-man-pages common-aliases extract history bgnotify \
  systemd archlinux dnf gpg-agent sudo man rsync django rust cargo golang fd ripgrep \
  alias-tips history-search-multi-word fast-syntax-highlighting)
-# zsh-autosuggestions)
+ # zsh-autosuggestions)
 
 ## Plugin configuration
 # suggest aliases
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="" # space separated
 export ZSH_PLUGINS_ALIAS_TIPS_EXPAND=1
 #export ZSH_PLUGINS_ALIAS_TIPS_REVEAL=1 # demo mode
+
+# limit autosuggest
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HISTORY_IGNORE=120
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# HSMW compatibility with fsh & autosuggest
+zstyle :plugin:history-search-multi-word reset-prompt-protect 1
+
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
+# https://github.com/zsh-users/zsh-autosuggestions/issues/351
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 ## User configuration
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"
@@ -104,6 +135,9 @@ source "$ZSH/oh-my-zsh.sh"
 # disable zsh wildcards
 unsetopt nomatch
 
+# plugin config: autosuggest via Ctrl+Space
+bindkey '^ ' autosuggest-accept
+
 # history
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_SPACE
@@ -111,6 +145,9 @@ export HISTCONTROL=ignorespace
 
 # source custom aliases
 source "$HOME/.aliases"
+
+# custom shell function "aliases"
+function dsf() { diff -u "$1" "$2" | diff-so-fancy; }
 
 # gpg-agent workaround for ssh/scp
 ssh() {

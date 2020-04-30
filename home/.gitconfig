@@ -37,5 +37,20 @@
 [gpg]
 	program = gpg2
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFXi --pattern '^(Date|added|deleted|modified): '
+	pager = diff-so-fancy | less --tabs=4 -RFXin --pattern '^(Date|added|deleted|modified): '
 	excludesfile = /home/johnp/.gitignore_global
+	sparsecheckout = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

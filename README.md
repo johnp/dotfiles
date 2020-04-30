@@ -1,10 +1,6 @@
 ## Installation
 
 1. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/#basic-installation)
-
-    ```
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    ```
 2. Install [homeshick](https://github.com/andsens/homeshick/wiki/Installation)
 
     ```
@@ -18,12 +14,6 @@
 4. Install oh-my-zsh plugins
 
     ```
-    sh $HOME/.homesick/repos/dotfiles/install_plugins.sh
+    sh $HOME/.homesick/repos/dotfiles/home/.local/bin/plugin_upgrade_oh_my_zsh
     ```
 5. Install diff-so-fancy (used for git diffs) via package manager or npm.
-
-## TODO
-
-* [Bootstrapping](https://github.com/andsens/homeshick/wiki/Simplistic-bootstraping-script)
-* Auto-Update for oh-my-zsh plugins
-* Check out getantibody/antibody

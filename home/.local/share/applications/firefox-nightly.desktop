@@ -16,7 +16,7 @@ Actions=NewWindow;NewPrivateWindow;SafeMode
 Categories=Network;WebBrowser;
 Comment[en_US]=Browse the Web
 Comment=Browse the Web
-Exec=firejail --shell=none --env=mesa_glthread=true --env=radeonsi_assume_no_z_fights=true --env=radeonsi_commutative_blend_add=true --join-or-start=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
+Exec=firejail --shell=none --rmenv=RUST_BACKTRACE --env=mesa_glthread=true --env=radeonsi_assume_no_z_fights=true --env=radeonsi_commutative_blend_add=true --join-or-start=browser --allow-debuggers --disable-mnt --whitelist=/opt/nightly/ --whitelist=~/Sync --whitelist=~/Repos --whitelist=~/.tmp -- /opt/nightly/firefox %u
 GenericName[en_US]=Web Browser
 GenericName=Web Browser
 Icon=/opt/nightly/browser/chrome/icons/default/default128.png
